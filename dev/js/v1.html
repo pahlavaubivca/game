@@ -1,0 +1,38 @@
+<html>
+<head>
+</head>
+<body>
+<div id="a"></div>
+<script>
+    (function () {
+        var arx = 0, ary = 0;
+        var arr = 0, arr2 = 0, count = -2;
+
+        function index(x, y) {
+            while (Math.abs(count) < (arr.length)) {
+                arx = arr.lastIndexOf(x, count);
+                ary = arr2.lastIndexOf(y, count);
+                if (arx!=-1 && ary!=-1 && arx == ary) {
+                    return true;
+                }
+                count--;
+            }
+            return false;
+        }
+
+        arr = [11, 12, 15, 11, 18, 56, 33, 11, 241, 333];
+        arr2 = [22, 34, 23, 12, 18, 22, 33, 18, 435, 11];
+
+        var t = index(11,34);
+        if (!t) {
+            console.log('no');
+        }
+        if (t) {
+            console.log('yes');
+        }
+
+    })();
+</script>
+
+</body>
+</html>

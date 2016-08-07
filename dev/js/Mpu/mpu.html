@@ -1,0 +1,212 @@
+<html>
+<head>
+</head>
+<body>
+<script>
+(function () {
+						
+			var adm_baner={};
+                        adm_baner.customRender = true;
+                        window.admixer_count_i = 0;
+
+				var t = document.createElement('div');
+				t.id='aligator';
+				document.body.appendChild(t);
+
+
+
+  
+                        function makeFlashDiv(movieUrl, clickUrl, id, width, height) {
+      if (navigator.appVersion.indexOf("MSIE") != -1)
+      {
+	  
+      var html = '<div style="position:relative;width:1px;height:1px;overflow:hidden;" id="' + id + '"><object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" width="' + width + '" height="' + height + '" id="flash_' + id + '" align="middle">';
+			html += '<param name="movie" value="' + movieUrl + '" />';
+			html += '<param name="quality" value="high" />';
+			html += '<param name="bgcolor" value="#ffffff" />';
+			html += '<param name="play" value="true" />';
+			html += '<param name="loop" value="true" />';
+			html += '<param name="wmode" value="transparent" />';
+			html += '<param name="scale" value="showall" />';
+			html += '<param name="menu" value="true" />';
+		 html += '<PARAM NAME="AllowScriptAccess" VALUE="always" />';
+		 html += '<PARAM NAME="FlashVars" VALUE="link1=' + escape(clickUrl) + '" />';
+			html += '<param name="devicefont" value="false" />';
+			html += '<param name="salign" value="" />';
+			html += '</object></div>';
+									return html;
+      }
+      else{
+      var html = '<div style="position:relative;width:1px;height:1px;overflow:hidden;" id="' + id + '"><OBJECT id="flash_' + id + '" classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" ';
+                            html += ' codebase=""   WIDTH="' + width + '" HEIGHT="' + height + '">';
+                            html += '<PARAM NAME="movie" VALUE="' + movieUrl + '&link1=' + escape(clickUrl) + '" />';
+                            html += '<PARAM NAME=wmode VALUE="transparent" />';
+                            html += '<PARAM NAME=AllowScriptAccess VALUE="always" />';
+                            html += '<EMBED AllowScriptAccess="always" wmode="transparent" ';
+                            html += 'src="' + movieUrl + '" ';
+                            html += 'FlashVars="link1=' + escape(clickUrl) + '" ';
+                            html += ' width="' + width + '" height="' + height + '" type="application/x-shockwave-flash" name="flash_' + id + '" PLUGINSPAGE="">';
+                            html += '</EMBED></OBJECT></div>';
+                            return html;}    
+                        }
+
+
+
+
+
+
+
+                       window.admixer_MPU =
+                        {
+                        panels: [],
+                        addPanel: function (pnl) {
+                            var me = window.admixer_MPU;
+                            me.panels.push(pnl);
+                        },
+						
+						
+						    showPanel3: function (num) {
+                            var me = window.admixer_MPU;
+                            me.panels[0].style.width = '1px';
+                            me.panels[0].style.height = '1px';
+                            me.panels[1].style.width = '300px';
+                            me.panels[1].style.height = '600px';
+							window.admixer_count_i = 1;
+
+                            me.getMovie('flash_' + me.panels[1].id).start();	
+		               },
+						
+                        showPanel2: function (num) {
+						if (window.admixer_count_i == 1){
+                            var me = window.admixer_MPU;
+                          //  me.panels[0].style.width = '1px';
+                         //   me.panels[0].style.height = '1px';
+                          //  me.panels[1].style.width = '300px';
+                          //  me.panels[1].style.height = '600px';
+
+                            me.getMovie('flash_' + me.panels[1].id).start();	
+							}
+					
+                        },
+                        showPanel1: function (width, height) {
+                            var me = window.admixer_MPU;
+                            me.panels[0].style.width = '990px';
+                            me.panels[0].style.height = '640px';
+                            me.panels[1].style.width = '1px';
+                            me.panels[1].style.height = '1px';
+							me.getMovie('flash_' + me.panels[0].id).start();
+                        },
+                        hidePanel: function (num) {
+                            admixer_MPU.panels[num].style.width = '1px';
+                            admixer_MPU.panels[num].style.height = '1px';
+                        },
+
+                        getTopLeft: function (elm) {
+                            var x = elm.offsetLeft, y = elm.offsetTop;
+                            elm = elm.offsetParent;
+                            while (elm != null) {
+        var nx = parseInt(elm.offsetLeft);
+        nx = isNaN(nx)? 0 : nx;
+        var ny = parseInt(elm.offsetTop);
+        ny = isNaN(ny)? 0 : ny;
+        
+                                x = parseInt(x) + nx ;
+                                y = parseInt(y) + ny;
+                                elm = elm.offsetParent;
+                            }
+                            return { top: y, left: x };
+                        },
+
+                        getMovie:
+                        function (movieName) {
+                            if (navigator.appName.indexOf("Microsoft") != -1) {
+                                if (document[movieName])
+                                    return document[movieName];
+                                else if (window[movieName])
+                                    return window[movieName];
+                                else {
+                                    var forms = document.forms;
+                                    for (var i = 0; i < forms.length; i++) {
+                                        if (forms[i][movieName])
+                                            return forms[i][movieName];
+                                    }
+
+                                }
+
+                            }
+                            else {
+                                return document[movieName]
+                            }
+
+                        }
+                    }
+
+
+
+
+                //  var html = document.createElement('div');
+                         html = '<div style="position:relative;padding:0px;margin:0px; ">';
+                    
+						html += makeFlashDiv('http://admixercreatives.blob.core.windows.net/vova/screenGlide/finland/new/~990_640.swf', adm_baner.clickUrl, 'adm567panel11111', 990, 640);
+                        html += makeFlashDiv('http://admixercreatives.blob.core.windows.net/vova/screenGlide/finland/new/~300_600.swf', adm_baner.clickUrl, 'adm567panel22222', 300, 600);
+                        html += '</div>';
+      if(adm_baner.phId&&adm_baner.phId.length>0)
+      {
+       document.getElementById(adm_baner.phId).innerHTML = html;
+      }
+      else
+      {
+	  //var y = document.getElementById('aligator');
+	  //y.appendChild(html);
+	  document.getElementById('aligator').innerHTML = html
+	  //document.write(html);
+	  }
+
+
+
+
+
+
+                        
+                        var pnl1 = document.getElementById('adm567panel11111');
+                        admixer_MPU.addPanel(pnl1);
+
+                        var pnl2 = document.getElementById('adm567panel22222');
+                        admixer_MPU.addPanel(pnl2);
+
+						
+						
+						
+						
+						
+                       admixer_MPU.panels[0].style.width = '990px';
+                        admixer_MPU.panels[0].style.height = '640px';
+						admixer_MPU.panels[0].style.position = 'fixed';
+						admixer_MPU.panels[0].style.left = '50%';
+						admixer_MPU.panels[0].style.marginLeft = '-480px';
+						admixer_MPU.panels[0].style.top = '50%';
+						admixer_MPU.panels[0].style.marginTop = '-320px';
+						admixer_MPU.panels[0].style.zIndex = '999999999999999999';
+					
+						admixer_MPU.panels[1].style.width = '1px';
+						admixer_MPU.panels[1].style.height = '1px';
+
+						admixer_MPU.panels[0].style.zIndex = "999999999999999999999999";
+						admixer_MPU.panels[1].style.zIndex = "999999999999999999999999";
+
+						if (document.getElementsByClassName("topbar")){
+							var x = document.getElementsByClassName("topbar");
+							var i;
+							for (i = 0; i < x.length; i++) {
+								x[i].style.zIndex = 1;
+							}
+						}
+							else
+							{}
+					
+							})();
+							
+							
+</script>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<html>
+<head>
+</head>
+<body>
+
+<!-- <script type='text/javascript'>
+(function () {
+	var w = window, d = document;
+	w.admixZArr = (w.admixZArr || []);
+	w.admixerSmOptions = (w.admixerSmOptions || {});
+	w.admixerSmOptions.showAdsOnLoad = true;
+</script>
+<script type="text/javascript" src="http://cdn.admixer.net/scriptlib/asm2.js?v=3"></script -->
+
+<script type="text/javascript">
+    (function () {
+        var w = window, d = document;
+        var protocol = /https/i.test(w.location.protocol) ? 'https:' : 'http:';
+        w.amSlots = (w.amSlots || []);
+        w.invPathB = protocol + '//inv-nets.admixer.net';
+        w.amCPath = protocol + '//az703203.vo.msecnd.net/';
+        w.amHost = 'sf';
+        
+        if (!w.aml) {
+            var aml = document.createElement('script');
+            aml.id = 'amlScript';
+            aml.async = true;
+            aml.type = 'text/javascript';
+            aml.src = w.amCPath + 'scripts3/loader.js';
+            var node = d.getElementsByTagName('script')[0];
+            node.parentNode.insertBefore(aml, node);
+        }
+    })();
+</script>
+
+<div id='admixer_async_1680019090'></div>
+<script type="text/javascript">
+    window.amSlots = (window.amSlots || []);
+    window.amSlots.push({ item: '10671ea5-091d-4fd1-8a35-cc6c5779508d', ph: 'admixer_async_1680019090', i: 'inv-nets' });
+</script>

@@ -1,0 +1,37 @@
+<html>
+	<head>
+	</head>
+	<body>
+		<select id="selectValue"></select>
+		<script>
+			var xhr = new XMLHttpRequest();
+			var url='http://buhgalter911.com/Services/ExchangeRateNBU.asmx/GetCurrentRates';
+			//var url='http://localhost/js/kurs/kursxml.xml';
+			xhr.open("GET", url, true);
+
+			xhr.onreadystatechange = function() {
+			  if (xhr.readyState != 4) return;
+				if (xhr.status != 200) {
+				  console.log( xhr.status + ': ' + xhr.statusText );
+				} else {
+				  console.log( xhr.responseText ); 
+				}
+				
+				var respXML = xhr.responseXML;
+				var ttt = '';
+				CodeLitTagXML = respXML.getElementsByTagName("CodeLit");
+
+				for(var x = 0; x <= CodeLitTagXML.length; x++)
+				{
+					ttt = ttt + CodeLitTagXML[x].childNodes[0].nodeValue;
+					var option = document.createElement("OPTION");
+					option.id = ttt;
+					option.text = ttt;
+					document.getElementById('selectValue').appendChild(option);
+					ttt = "";
+				}
+			}	
+			xhr.send();
+		</script>
+	</body>
+</html>

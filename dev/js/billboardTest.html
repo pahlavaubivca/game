@@ -1,0 +1,802 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<base href="http://www.terrawoman.ua/"/>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251" />
+<title>Женский журнал TerraWoman.UA</title>
+<meta name="description" content="Женский журнал о красоте, здоровом способе жизни, советы для похудения, последние новинки в мире моды. Размышления на тему отношений, непростых жизненных ситуаций. Дружественный женский форум на котором можно высказать свое мнение и получить умный ответ на правильно заданный вопрос." />
+<meta name="keywords" content="женский, on-line, журнал, портал, форум, красота, психологические, тесты, секс, гороскоп, клуб, имена, дети, здоровье, киев, украина" />
+<link rel="shortcut icon" href="http://i.terrawoman.com/favicon.ico" />
+<link rel="stylesheet" type="text/css" href="http://i.terrawoman.com/css_v3/style.css" />
+<link rel="stylesheet" type="text/css" href="http://i.terrawoman.com/css_v3/skin.css" />
+<script type="text/javascript" src="http://i.terrawoman.com/js_v3/jquery.tools.min.js"></script>
+<script type="text/javascript" src="http://i.terrawoman.com/js_v3/scripts.js"></script>
+
+<script type='text/javascript'>
+$(document).ready(function() {
+    
+var currentPosition = 0;
+  var slideWidth = 238;
+  var slides = $('.sli');
+  var numberOfSlides = slides.length;
+
+  // Remove scrollbar in JS
+  $('#slidesCont').css('overflow', 'hidden');
+
+  // Wrap all .slides with #slideInner div
+  slides
+    .wrapAll('<div id="slideIn"></div>')
+    // Float left to display horizontally, readjust .slides width
+	.css({
+      'float' : 'left',
+      'width' : slideWidth
+    });
+
+  // Set #slideInner width equal to total width of all slides
+  $('#slideIn').css('width', slideWidth * numberOfSlides);
+
+  // Hide left arrow control on first load
+  manageControls(currentPosition);
+
+  // Create event listeners for .controls clicks
+  $('.contr')
+    .bind('click', function(){
+    // Determine new position
+	currentPosition = ($(this).attr('id')=='rightC') ? currentPosition+1 : currentPosition-1;
+    
+	// Hide / show controls
+    manageControls(currentPosition);
+    // Move slideInner using margin-left
+    $('#slideIn').animate({
+      'marginLeft' : slideWidth*(-currentPosition)
+    });
+  });
+
+  // manageControls: Hides and Shows controls depending on currentPosition
+  function manageControls(position){
+    // Hide left arrow if position is first slide
+	if(position==0){ $('#leftC').hide() } else{ $('#leftC').show() }
+	// Hide right arrow if position is last slide
+    if(position==numberOfSlides-1){ $('#rightC').hide() } else{ $('#rightC').show() }
+  }	
+})
+
+
+
+</script>
+
+<!--Блок подключения библиотеки скриптов Admixer-->
+<script type='text/javascript'>
+(function () {
+	var w = window, d = document;
+	w.admixZArr = (w.admixZArr || []);
+	w.admixerSmOptions = (w.admixerSmOptions || {});
+	w.admixerSmOptions.showAdsOnLoad = true;
+</script>
+<script type="text/javascript" src="http://cdn.admixer.net/scriptlib/asm2.js?v=3"></script>		
+<!--Конец блока подключения библиотеки скриптов Admixer-->
+
+<!--[if lt IE 9]>
+<link rel="stylesheet" type="text/css" href="http://i.terrawoman.com/css_v3/ie.css" />
+<![endif]-->
+<!--[if IE 7]>
+<link rel="stylesheet" type="text/css" href="http://terrawoman.com/css_v3/ie7.css" />
+<script type="text/javascript" src="http://i.terrawoman.com/js_v3/ie7.js"></script>
+<![endif]-->
+
+<!-- (C)2000-2008 Gemius SA - gemiusAudience / terrawoman.com / Glavnaja stranitsa sajta -->
+<script type="text/javascript">
+<!--//--><![CDATA[//><!--
+var pp_gemius_identifier = new String('zaBFLesGfQw4CgM1B.zoJ5QJ3_MuZG8cMRbMVjmny5X.77');
+//--><!]]>
+</script>
+<script type="text/javascript" src="http://i.terrawoman.com/java/xgemius.js "></script>
+
+</head>
+<body>
+
+
+
+<center>
+<div style="min-height:15px;">
+<div id="ph_id"></div>
+<script src="http://localhost/js/Script1.js"></script>
+
+<!-- <div id="admixer_async_1229798341"></div>
+<script type="text/javascript">
+    window.admixZArr = (window.admixZArr || []);
+    window.admixZArr.push({ z: 'b12767bc-9ac6-4212-a033-50a31b81d1d5', ph: 'admixer_async_1229798341'});
+</script> -->
+
+
+</div>
+</center>
+
+
+<div id="page">
+	<div id="header">
+		<div id="logo">
+			<a href="/"></a>
+		</div>
+		<div id="lang" style="margin:-35px 5px 0 0; z-index:2;">
+			<ul>
+				<li class="ua"><a href="/ua" title="Жіночий журнал ТерраВумен - Українська версія"></a></li>
+			</ul>
+		</div>
+		<div id="nav">
+			<ul>
+				<li  ><a href="/health" title="Хочешь быть здоровой?">Здоровье</a></li>
+				<li  ><a href="/beauty" title="Уход за кожей, выпадения волос, правила макияжа">Красота</a></li>
+				<li  ><a href="/figura" title="Похудеть и удержать вес в норме. Каким спортом заняться">Фигура</a></li>
+				<li  ><a href="/fashion" title="Обзор последних новинок моды. Твой стиль">Мода</a></li>
+				<li  ><a href="/attitude" title="Секреты успешных отношений между мужчиной и женщиной">Отношения</a></li>
+				<li  ><a href="/sex" title="Между нами, девочками: как ЭТО было">Про ЭТО</a></li>
+				<li  ><a href="/children" title="Родить и воспитать здорового ребенка. Проблемный возраст">Дети</a></li>
+				<li  ><a href="/vip" title="Биография звезд и знаменитостей">ЗВЕЗДЫ</a></li>
+				<li  ><a href="/mans_opinion" title="Мужское мнение о женских проблемах">Мужской взгляд</a></li>
+				<li  ><a href="/psychology" title="Психологический штурм. Почему он разлюбил? Как пережить измену?">Психология</a></li>
+				<li   class="last"><a href="/man" title="Лабораторное исследование мужчин. Что у них там внутри">Мужеология</a></li>
+
+			</ul>
+		</div>
+		<div id="menu">
+<!--
+Банер конкурса
+-->
+
+			<ul>
+				<li class="forum"><a href="/forum/index.php"  title="Женский форум ТерраВумен">Форум</a></li>
+
+				<li class="consultation"><a href="/test" title="Психологические тесты для мужчин и женщин">Пройди тест</a></li>
+
+				<li class="horoscope"><a href="http://horo.terrawoman.ua" title="Женский гороскоп на завтра и послезавтра. Гороскоп на неделю">Гороскоп</a></li>
+
+				<li class="numerology"><a href="/num/" title="Пророчество по дате рождения">Нумерология</a></li>
+
+				<li class="cookery"><a href="/cookery/top50/" title="Кулинарные рецепты народов мира">Кулинария</a></li>
+			</ul>
+		</div>
+
+		<div id="inside_menu2">
+			<ul>
+
+
+<li><a href="/celebrate" title="Праздники">Праздники</a></li>
+<li><a href="/house_efforts" title="Домашние хлопоты">Хозяюшка</a></li>
+<li><a href="/dreams" title="Сонник: толкование снов">Сонник</a></li>
+<li><a href="/names" title="Как выбрать имя ребенку">Выбрать имя ребенку</a></li>
+
+			</ul>
+		</div>
+
+
+<!-- СЛАЙДЕР -->
+		<div id="accordion">
+			<div id="accordion_title">
+				<a href="/100top"><span>Популярные статьи</span></a>
+			</div>
+			<div id="tabs">
+
+
+
+				<div class="tabs_item">
+					<div class="handle">
+						<span>Избавляемся от тёмных кругов под глазами</span>
+					</div>
+					<div style="width:520px; display:block;" class="tab">
+					<img src="http://i.terrawoman.com/datas/img/d/15/mask_01_07.jpg" width="200" height="300" alt="Избавляемся от тёмных кругов под глазами" />
+						<div style="padding-right:10px;">
+					<h1><a href="beauty/secrets_of_beauty/izbavlyaemsya_ot_tyomnyh_krugov_pod_glazami/comments">Избавляемся от тёмных кругов под глазами</a></h1>
+					<p class='date'>26 сентября 2015, 12:53</p>
+                                        <div style="text-align: justify;">Глядя на себя в зеркало, мы можем быть довольны внешним видом практически на сто процентов. Но такая досадная мелочь, как тёмные круги под глазами, могут снизить уверенность женщины в собственной привлекательности. Такой нюанс не добавляет красоты нашему внешнему виду и лишь подчёркивает уставший взгляд переутомлённых глаз. </div>
+						</div>
+					</div>
+				</div>
+
+
+
+<!-- Обзор женский журналов -->
+
+
+				<div class="tabs_item">
+					<div class="handle">
+						<span>Модний make-up осені: 6 трендових відтінків</span>
+					</div>
+					<div class="tab">
+					<img src="http://i.terrawoman.com/datas/img/d/446/marsala_make_up.jpg" width="200" alt="" />
+						<div style="padding-right:10px;">
+					<h3><a href="beauty/secrets_of_beauty/autumn_make_up_15/comentar">Модний make-up осені: 6 трендових відтінків сезону (16 фото)</a></h3>
+					<p class='date'>26 сентября 2015, 23:03</p>
+                                        <div style="text-align: justify;">Тепло літніх днів вже наближається до фінішної прямої, ще трохи і ми зануримося в золоту осінь, услід за якою прийде холодна зима. Тому, істинні модниці вже у пошуках актуальної колірної палітри нового сезону. Незмінними залишаються пастельні тони з їх кольорами запашного бузку і цукрової вати, всілякими ніжно-блакитними відтінками. Дизайнери модного одягу з упевненістю заявляють, що усі ці ніжні кольори будуть доречними і в період прохолодно-дощовитої осені, і серед снігових просторів зими. Як </div>
+
+						</div>
+					</div>
+				</div>
+
+
+
+				<div class="tabs_item">
+					<div class="handle">
+						<span>7 продуктів, які не слід їсти перед сном</span>
+					</div>
+					<div class="tab">
+					<img src="http://i.terrawoman.com/datas/img/d/158/refreg(fashiontime.ru).jpg" width="200" alt="" />
+						<div style="padding-right:10px;">
+					<h3><a href="health/health_news/7_produktiv_yaki_ne_slid_yisti_pered_snom/comentar">7 продуктів, які не слід їсти перед сном</a></h3>
+					<p class='date'>26 сентября 2015, 23:03</p>
+                                        <div style="text-align: justify;">Неправильний підхід до харчування перед сном сприяє не лише набиранню зайвої ваги, хронічному недосипу, але і може серйозно пошкодити нашому шлунку. </div>
+
+						</div>
+					</div>
+				</div>
+
+
+
+				<div class="tabs_item">
+					<div class="handle">
+						<span>5 здорових правил, які додадуть вам декільк</span>
+					</div>
+					<div class="tab">
+					<img src="http://i.terrawoman.com/datas/img/d/80/wake_up4.jpg" width="200" alt="" />
+						<div style="padding-right:10px;">
+					<h3><a href="health/health_news/5_zdorovih_pravil_yaki_dodadut_vam_dekilka_rokiv_zhittya/comentar">5 здорових правил, які додадуть вам декілька років життя</a></h3>
+					<p class='date'>26 сентября 2015, 12:13</p>
+                                        <div style="text-align: justify;">Хоча кожен з нас хотів би бути здоровим впродовж багатьох років, зазвичай ми нічого не робимо для цього. І річ навіть не в тому, що у нас не хапає для цього сили волі, а в тому, що часто ми просто не представляємо, з чого розпочати. Тому вам варто якнайскоріше вивчити основні правила, щоб переконатися, що ви здатні досягти цієї мети. В першу чергу, ви повинні позбавитися від поганих звичок (паління, алкоголь і безсонні ночі). Потім ви можете сміливо приступити до подальших змін.</div>
+
+						</div>
+					</div>
+				</div>
+
+<!-- Обзор женский журналов -->
+
+			</div>
+		</div>
+<!-- // СЛАЙДЕР -->
+
+
+
+
+		<div id="banner_head_right">
+<!-- BANNER 240*350 OR 300*250 -->
+
+<!-- BANNER 240*350 OR 300*250 -->
+<center>
+<!-- Установите этот блок в том месте, где должен отображаться банер    -->
+<div style="height: 350px; width:300px; display:table-cell; vertical-align:middle;" id="admixer_async_83354463"></div>
+<script type="text/javascript">
+    window.admixZArr = (window.admixZArr || []);
+    window.admixZArr.push({ z: '6abb134c-7163-4ee5-a9ba-e23a1d08fb31', ph: 'admixer_async_83354463'});
+</script>
+</center>
+
+    
+<!-- // BANNER 240*350 OR 300*250 -->
+	</div>
+	</div>
+
+
+<!--
+Вывод блока участников конкуса
+-->
+
+	<div id="container2">
+
+		<div id="column_left">
+
+
+
+			<div class="block1">
+				<h2>Нові публікацї</h2>
+				<ul>
+
+
+						<li style="list-style-type: circle;"><a href="/ua/beauty/secrets_of_beauty/autumn_make_up_15/comentar" title="Модний make-up осені: 6 трендових відтінків сезону (16 фото)">Модний make-up осені: 6 трендових відтінків сезону (16 фото)</a></li>
+
+
+						<li style="list-style-type: circle;"><a href="/ua/health/health_news/7_produktiv_yaki_ne_slid_yisti_pered_snom/comentar" title="7 продуктів, які не слід їсти перед сном">7 продуктів, які не слід їсти перед сном</a></li>
+
+
+						<li style="list-style-type: circle;"><a href="/ua/health/health_news/5_zdorovih_pravil_yaki_dodadut_vam_dekilka_rokiv_zhittya/comentar" title="5 здорових правил, які додадуть вам декілька років життя">5 здорових правил, які додадуть вам декілька років життя</a></li>
+
+
+						<li style="list-style-type: circle;"><a href="/ua/health/health_news/8_superfudiv_pro_yakih_slid_znati/comentar" title="8 суперфудів, про які слід знати">8 суперфудів, про які слід знати</a></li>
+
+
+						<li style="list-style-type: circle;"><a href="/ua/fashion/fashion_news/tonkiy_sharf/comentar" title="Тонкий шарф - модний тренд осені (фото)">Тонкий шарф - модний тренд осені (фото)</a></li>
+
+				
+				</ul>
+			</div>
+
+
+    
+			<div class="block_test">
+				<h2>Психоанализ</h2>
+				<ul>
+
+<li><img src='/img_v3/test_all.png' align=left ><a href="/cgi-bin/tests/index.pl?N=uveren&Q=1&B=0">Уверены ли вы в себе?</a></li><li><img src='/img_v3/test_woman.png' align=left ><a href="/cgi-bin/tests/index3.pl?N=W27-umor&N1=1&Q=1&B=0">Ты с юмором или без?</a></li><li><img src='/img_v3/test_man.png' align=left ><a href="/cgi-bin/tests/index3.pl?N=M06-raskovanost&N1=1&Q=1&B=0">Твоя раскованность</a></li><li><img src='/img_v3/test_all.png' align=left ><a href="/cgi-bin/tests/index.pl?N=lenivi&Q=1&B=0">Ленивы ли вы?</a></li><li class="last"><img src='/img_v3/test_woman.png' align=left ><a href="/cgi-bin/tests/index3.pl?N=W39-samoobladanie&N1=1&Q=1&B=0">Твое самообладание</a></li>				</ul>
+				<div class="on_forum">
+					<a href="/test" title="Психологические тесты">Все тесты</a>
+				</div>
+			</div>
+
+
+
+
+
+			<div class="block2">
+				<h2>Женский форум</h2>
+				<ul>
+<li><a href="/forum/index.php?showtopic=12389&st=140">Как вы ласково называете свою половинку?
+</a></li><li><a href="/forum/index.php?showtopic=1920&st=1780">Свадебные наряды, выбор платья
+</a></li><li><a href="/forum/index.php?showtopic=10331&st=20">Как провести девичник перед свадьбой
+</a></li><li><a href="/forum/index.php?showtopic=3416&st=400">Сколько стоит свадьба
+</a></li><li class="last"><a href="/forum/index.php?showtopic=5013">Самый яркий комплимент после секса
+</a></li>				</ul>
+				<div class="on_forum">
+					<a href="/forum/index.php">Перейти на форум</a>
+				</div>
+			</div>
+
+
+			<div id="vote">
+
+
+<form method="post" action="http://www.terrawoman.com/voting.php">				
+<span>Как часто Вы занимаетесь СЕКСОМ?</span>				<div class="vote">
+					<input type="radio" name="option_id" value="1"> Каждый день
+				</div>				<div class="vote">
+					<input type="radio" name="option_id" value="2"> 2-3 раза в неделю
+				</div>				<div class="vote">
+					<input type="radio" name="option_id" value="3"> Несколько (2-3) раз в месяц
+				</div>				<div class="vote">
+					<input type="radio" name="option_id" value="4"> Бывает, иногда
+				</div>				<div class="vote">
+					<input type="radio" name="option_id" value="5"> Я и сейчас им занимаюсь :)
+				</div>				<div class="vote">
+					<input type="radio" name="option_id" value="6"> Я еще не в курсе, что ЭТО
+				</div><br><center>
+                    <input type="submit" value="Голосовать" class="input" name="submit">
+                    <input type="hidden" name="action" value="vote">
+                    <input type="hidden" name="poll_ident" value="10">
+<br>
+<font  size="1"><a href="/voting.php?action=results&amp;poll_ident=10"> просмотреть результаты </a>
+
+</center>
+
+</form>
+
+			</div>
+
+
+
+
+		</div>
+
+
+
+
+		<div class="main_block">
+
+
+<div style="margin-left:5px; float:right;">
+<noindex>
+<div align=center>
+<!-- UKR.NET -->
+<script language="javascript" type="text/javascript">
+		document.write('<iframe src="http://informers.ukr.net/partner/banner.php?sid=116818&bn=3&pz=1&rnd=' + Math.round(Math.random() * 1000000000) + '&sizewidth='+screen.width+'&sizeheight='+screen.height+'&colors='+screen.colorDepth+'&referrer='+encodeURIComponent(window.document.referrer)+'" width="200" height="300" frameborder="0" vspace="0" hspace="0" marginwidth="0" marginheight="0" scrolling="no"></iframe>');
+</script>
+<noscript>
+	<iframe src="http://informers.ukr.net/partner/banner.php?sid=116818&bn=3&pz=1" width="200" height="300" frameborder="0" vspace="0" hspace="0" marginwidth="0" marginheight="0" scrolling="no"></iframe>
+</noscript>
+<!-- /UKR.NET -->
+</div>
+</noindex>
+</div>
+
+
+			<div style="height:268px;" class="short_post">
+				<div class="category_title">
+					<a href="children">Детки-конфетки</a>
+				</div>
+				<img src="http://i.terrawoman.com/datas/img/d/433/vybor_kolyaski.jpg" alt="На что важно обратить внимание, покупая первую коляску"  width="170"  />
+				<h2><a href="children/pokupaya_pervuyu_kolyasku/comments">На что важно обратить внимание, покупая первую коляску</a></h2>
+					<p class='date'>26 сентября 2015, 12:15</p>
+				Приходит время, когда ваш малыш начнет сидеть самостоятельно без посторонней помощи, это означает, что наступила пора покупать прогулочную коляску. В данной статье речь пойдет о том, какую лучше выбрать прогулочную коляску....		
+			</div>
+		</div>
+
+
+
+<div style="margin: -5px 0 10px 0; border-right:1px solid #f08767;">
+ 
+
+			<div id="numerology2">
+<form method=POST target="_top" action="http://www.terrawoman.com/num/go/heart.php">
+<input type=hidden name=go value=1>
+				<span>Нумерология/Число сердца</span><br />
+				ваши тайные мысли и желания
+				<input type="text" style="height:20px;" class="num_text" name="name" value="Введите ваше полное имя" onblur="if(this.value=='') this.value='Введите ваше полное имя';" onfocus="if(this.value=='Введите ваше полное имя') this.value='';" />
+				<input type="image" src="http://i.terrawoman.com/img_v3/num_button.png" class="num_button" />
+				<div id="example">
+					Пример: Василенко Ольга Петровна
+				</div>
+</form>
+			</div>
+
+
+
+
+</div>
+
+
+
+
+
+		<div class="main_block">
+			<div class="slide_articles">
+				<h3>Статьи по теме</h3>
+				<div id="slidesh">
+					<div id="slidesCont">
+
+
+
+						<div class="sli">
+							<div style="height:163px;" class="slide_box">
+								<img src="http://i.terrawoman.com/datas/img/d/445/autumn_office_dresskod15.jpg"  width="200" height="300" alt="" />
+								<div class="slide_title">
+									<a href="fashion/your_style/autumn_office_dresskod15/comments">Офисная мода сезона осень 2015 (фото)</a>
+								</div>
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</div>
+
+
+			<div style="height:171px;" class="short_post">
+				<div class="category_title">
+					<a href="/fashion/your_style">Твой стиль</a>
+				</div>
+				<img src="http://i.terrawoman.com/datas/img/d/446/knitted_sweater.jpg"  width="100" height="150" alt="Вязаный свитер: актуальность этой осенью" width=100 />
+				<h3><a href="fashion/your_style/knitted_sweater_15/comments">Вязаный свитер: актуальность этой осенью</a></h3>
+					<p class='date'>26 сентября 2015, 09:24</p>
+				Вязаный свитер очень удобен, в нем можно как пойти на работу, так и гулять с ребенком, можно и на свидание, если украсить себя еще интересными аксессуарами. Особенность свитера в большой горловине, это создает прекрасный образ и защищает шею от осенних хол...		
+			</div>
+		</div>
+
+
+
+
+
+<div align=center style="margin: 10px 0 10px 200px;">
+<!-- Content banner -->
+<!-- Установите этот блок в том месте, где должен отображаться банер    -->
+<div id="admixer_async_928980230"></div>
+<script type="text/javascript">
+    window.admixZArr = (window.admixZArr || []);
+    window.admixZArr.push({ z: '69985748-12e6-4d2f-abac-ebbb378822b1', ph: 'admixer_async_928980230'});
+</script>
+</div>
+
+
+
+
+
+		<div id="column_right">
+
+<!-- Sinoptik.Ua -->
+<div  style="padding-bottom:5px;" id="SinoptikInformer" style="width:223px;" class="SinoptikInformer type1"><div class="siHeader"><div class="siLh"><div class="siMh"><a onmousedown="siClickCount();" href="http://sinoptik.ua/" target="_blank">Погода</a><a onmousedown="siClickCount();" class="siLogo" href="http://sinoptik.ua/" target="_blank"><img alt="Прогноз погоды" src="http://informers.sinoptik.ua/img/t.gif" /></a> <span id="siHeader"></span></div></div></div><div class="siBody"><table><tbody><tr><td class="siCityV" style="width:100%;"><div class="siCityName"><a onmousedown="siClickCount();" href="http://sinoptik.ua/погода-киев" target="_blank">Погода в <span>Киеве</span></a></div></tr><tr><td style="width:100%;"><div class="siCityV2"><div id="siCont0" class="siBodyContent"><div class="siLeft"><div class="siTerm"></div><div class="siT" id="siT0"></div><div id="weatherIco0"></div></div><div class="siInf"><p>влажность: <span id="vl0"></span></p><p>давление: <span id="dav0"></span></p><p>ветер: <span id="wind0"></span></p></div></div></div></td></tr></tbody></table><div class="siLinks"><span><a onmousedown="siClickCount();" href="http://sinoptik.ua/погода-киев" target="_blank">на сегодня</a> <a onmousedown="siClickCount();" href="http://sinoptik.ua/погода-киев/завтра" target="_blank">завтра</a> <a onmousedown="siClickCount();" href="http://sinoptik.ua/погода-киев/10-дней" target="_blank">10 дней</a></span> <span><a onmousedown="siClickCount();" href="http://sinoptik.ua/украина" target="_blank">в других городах</a></span></div></div><div class="siFooter"><div class="siLf"><div class="siMf"></div></div></div></div><script type="text/javascript" charset="UTF-8" src="http://informers.sinoptik.ua/js3.php?title=4&amp;wind=3&amp;cities=303010783&amp;lang=ru"></script>
+<!-- Sinoptik.Ua -->
+
+			<div class="block3">
+				<h3>Лучшие рецепты</h3>
+				<ul>
+<li><a href="http://www.terrawoman.ua/cookery/world_cook/russian/sharlotka_s_yablokami/cook">Шарлотка с яблоками</a></li><li><a href="/cookery/world_cook/azerbazh/shashlik_az/
+">Шашлык по-азербайджански</a></li><li><a href="/cookery/world_cook/alzhyr/koko_fant/
+">Цыпленок «Фантазия»</a></li><li><a href="/cookery/world_cook/alzhyr/ragu/
+">Рагу из баранины</a></li><li><a href="/cookery/world_cook/english/gov_engl/
+">Говядина по-английски</a></li><li><a href="/cookery/world_cook/armyanskaya/plov_gr/
+">Плов с гранатом</a></li>				</ul>
+				<div class="all_recipes">
+					<a href="/cookery/top50/">Все кулинарные рецепты</a>
+				</div>
+			</div>
+
+
+
+
+		</div>
+
+		<div id="content">
+
+
+
+
+
+			<div class="short_post">
+				<div class="category_title">
+					<a href="/beauty/secrets_of_beauty">Красота</a>
+				</div>
+				<img style="border: 3px solid #cabeb5;" src="http://i.terrawoman.com/datas/img/d/170/hair_summer_00.jpg" alt=""  width="100" height="150" />
+				<h3><a href="beauty/secrets_of_beauty/pricheska_po_tipu_litsa/comments">Прическа по типу лица: как длинна челки влияет на форму стрижки</a></h3>
+					<p class='date'>25 сентября 2015, 22:51</p>
+                                Давно известно, что изменить лицо человека может не только пластический хирург, но и парикмахер. И хотя тип лица значительно влияет на выбор прически, все-таки нужно не забывать о творческом подходе в этом увлекательном занятии. Как же правильно выбрать пр...
+			</div>
+
+
+
+
+			<div class="short_post">
+				<div class="category_title">
+					<a href="children">Детки-конфетки</a>
+				</div>
+				<img  style="border: 3px solid #cabeb5;" src="http://i.terrawoman.com/datas/img/d/35/gorshok_04.jpg" alt=""  width="100" height="150" />
+				<h3><a href="children/kak_priuchat_rebenka_k_gorshku/comments">Как приучать ребенка к горшку</a></h3>
+					<p class='date'>25 сентября 2015, 11:52</p>
+                                Родителям, у которых ребенок не был знаком с одноразовыми подгузниками, будет намного легче приучить к горшку. Но наверняка таких родителей единицы, потому стоит мамам и папам набраться терпения, так как процесс обучения только на первый взгляд несложный....
+			</div>
+		</div>
+	</div>
+
+
+	<div id="footer">
+		<div class="foot_posts">
+
+
+
+
+			<div class="foot_post_left">
+				<div class="short_post">
+					<div class="category_title">
+						<span>Хозяюшка</span>
+					</div>
+					<img style="border: 3px solid #cabeb5;" src="http://i.terrawoman.com/datas/img/d/438/gostinnaya.jpg" alt=""  width="100" height="150" />
+					<h3><a href="house_efforts/uyutnyy_dom/comments">Уютный дом: создаем атмосферу комфорта</a></h3>
+                                        Понятие уюта для каждого человека содержит свой собственный исключительный смысл. Для кого-то стиль хай-тек является самым успокоительно-домашним, а кому-то нужно множество подушечек, ковриков для душ...
+				</div>
+			</div>
+
+
+			<div class="foot_post_right">
+				<div class="short_post">
+					<div class="category_title">
+						<span>Детки-конфетки</span>
+					</div>
+					<img style="border: 3px solid #cabeb5;"  src="http://i.terrawoman.com/datas/img/d/30/woman_with_child_00.gif" alt=""  width="100" height="150"/>
+					<h3><a href="children/plach_mladentsa/comments">Плач младенца: 7 главных причин </a></h3>
+                                        Новорожденный младенец, который еще не умеет говорить, все свои чувства и эмоции доносит до родителей с помощью плача. И это только кажется, что все дети ревут всегда одинаково. В возрасте двух месяце...
+				</div>
+			</div>
+
+			<div class="foot_post_left">
+				<div class="short_post">
+					<div class="category_title">
+						<span>Праздники</span>
+					</div>
+					<img style="border: 3px solid #cabeb5;" src="http://i.terrawoman.com/datas/img/d/446/kolca.jpg" alt=""  width="100" height="150" />
+					<h3><a href="celebrate/kakoy_poludragotsennyy_kamen_komu_podhodit/comments">Подарок со смыслом: какой полудрагоценный камень, кому подходит</a></h3>
+                                        Хотите сделать непревзойденный подарок, но не позволяет бюджет? Выход очень прост. Украшения из полудрагоценных камней являются одним из способов для дополнения образа. Разнообразие изделий просто огр...
+				</div>
+			</div>
+
+
+			<div class="foot_post_right">
+				<div class="short_post">
+					<div class="category_title">
+						<span>Детки-конфетки</span>
+					</div>
+					<img style="border: 3px solid #cabeb5;"  src="http://i.terrawoman.com/datas/img/d/446/fashion_kids_autimn_15.jpg" alt=""  width="100" height="150"/>
+					<h3><a href="children/fashion_kids_autimn_15/comments">Детская осенняя мода: как одеть ребенка по сезону</a></h3>
+                                        Как это ни печально, но после жаркого лета, наступают холода, и родители начинают запасаться теплой одежкой для своих малышей. Осень по праву можно называть периодом демисезонной одежды для детей....
+				</div>
+			</div>
+
+
+
+
+
+
+
+
+		</div>
+
+
+
+
+
+<div>
+		<div id="foot_nav">
+			<div style="height:80px;" class="foot_nav_col">
+<p></p>
+<p></p>
+<p></p>
+			</div>
+			<div class="support_menu">
+				<ul>
+					<li><a href="/pda"  rel="nofollow">PDA-версия</a></li>
+					<li><a href="/adv" title="Разместить рекламу в онлайн журнале TerraWoman - Киев, Украина">Реклама в журнале</a></li>
+					<li><a href="/copyright" title="Хочу стать вашим журналистом">Хочу стать журналистом</a></li>
+				</ul>
+			</div>
+		</div>
+		<div id="foot_info">
+			<div id="foot_logo">
+				<a href="/"></a>
+			</div>
+			<div id="copy">
+				Редакция не всегда разделяет мнения авторов<br />
+				Условия использования материалов <a href="/copyright" title="Женского журнала TerraWoman">Женского журнала TerraWoman.UA</a><br />
+				Связаться с редакцией - <a href="/copyright">Татьяна Мартынюк</a><br />
+			</div>
+			<div id="stat">
+<noindex>
+<table border=0 cellPadding=1 cellSpacing=0 align=right>
+<tr>
+<td>
+<!-- Yandex.Metrika informer -->
+<a href=""
+target="_blank" rel="nofollow"><img src="//bs.yandex.ru/informer/27885762/3_1_FFFFFFFF_FFFFFFFF_0_pageviews"
+style="width:88px; height:31px; border:0;" alt="Яндекс.Метрика" title="Яндекс.Метрика: данные за сегодня (просмотры, визиты и уникальные посетители)" /></a>
+<!-- /Yandex.Metrika informer -->
+
+<!-- Yandex.Metrika counter -->
+<script type="text/javascript">
+(function (d, w, c) {
+    (w[c] = w[c] || []).push(function() {
+        try {
+            w.yaCounter27885762 = new Ya.Metrika({id:27885762,
+                    clickmap:true,
+                    trackLinks:true,
+                    accurateTrackBounce:true});
+        } catch(e) { }
+    });
+
+    var n = d.getElementsByTagName("script")[0],
+        s = d.createElement("script"),
+        f = function () { n.parentNode.insertBefore(s, n); };
+    s.type = "text/javascript";
+    s.async = true;
+    s.src = (d.location.protocol == "https:" ? "https:" : "http:") + "//mc.yandex.ru/metrika/watch.js";
+
+    if (w.opera == "[object Opera]") {
+        d.addEventListener("DOMContentLoaded", f, false);
+    } else { f(); }
+})(document, window, "yandex_metrika_callbacks");
+</script>
+<noscript><div><img src="//mc.yandex.ru/watch/27885762" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
+</td>
+
+<td align=center>
+<!--bigmir)net TOP 100 Part 2-->
+<a href="" rel="nofollow" target="_blank" onClick='img=new Image();img.src="http://www.bigmir.net/?cl=136757";'><img src="http://c.bigmir.net/?s136757&t8&l1" width="88" height="31" border="0" alt="bigmir)net TOP 100" title="bigmir)net TOP 100"></a>
+<!--bigmir)net TOP 100 Part 2-->
+</td><td align=center>
+
+<!--LiveInternet counter--><script type="text/javascript"><!--
+document.write("<a href='//www.liveinternet.ru/click' "+
+"target=_blank rel='nofollow'><img src='//counter.yadro.ru/hit?t14.6;r"+
+escape(document.referrer)+((typeof(screen)=="undefined")?"":
+";s"+screen.width+"*"+screen.height+"*"+(screen.colorDepth?
+screen.colorDepth:screen.pixelDepth))+";u"+escape(document.URL)+
+";"+Math.random()+
+"' alt='' title='LiveInternet: показано число просмотров за 24"+
+" часа, посетителей за 24 часа и за сегодня' "+
+"border='0' width='88' height='31'><\/a>")
+//--></script><!--/LiveInternet-->
+</td></tr>
+<tr><td colspan=2>
+</td></tr>
+</table>
+</noindex>
+			</div>
+		</div>
+
+</div>
+
+
+
+
+	</div>
+</div>
+
+
+<noindex>
+
+<!-- Reach media -->
+<!-- Установите этот блок в том месте, где должен отображаться банер    -->
+<div id="admixer_async_964661101"></div>
+<script type="text/javascript">
+    window.admixZArr = (window.admixZArr || []);
+    window.admixZArr.push({ z: 'f1c28831-1065-4f8c-85f1-fd8e6973b4f3', ph: 'admixer_async_964661101'});
+    admixerSm.start();
+</script>
+<!-- // Reach media -->
+
+   
+
+
+
+<noindex>
+
+
+<div style="position:absolute; top:-50px;">
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-425750-2', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+<!--bigmir)net TOP 100 Part 1-->
+<script type="text/javascript" language="javascript"><!--
+bmN=navigator,bmD=document,bmD.cookie='b=b',i=0,bs=[],bm={v:136757,s:136757,t:6,c:bmD.cookie?1:0,n:Math.round((Math.random()* 1000000)),w:0};
+for(var f=self;f!=f.parent;f=f.parent)bm.w++;
+try{if(bmN.plugins&&bmN.mimeTypes.length&&(x=bmN.plugins['Shockwave Flash']))bm.m=parseInt(x.description.replace(/([a-zA-Z]|\s)+/,''));
+else for(var f=3;f<20;f++)if(eval('new ActiveXObject("ShockwaveFlash.ShockwaveFlash.'+f+'")'))bm.m=f}catch(e){;}
+try{bm.y=bmN.javaEnabled()?1:0}catch(e){;}
+try{bmS=screen;bm.v^=bm.d=bmS.colorDepth||bmS.pixelDepth;bm.v^=bm.r=bmS.width}catch(e){;}
+r=bmD.referrer.slice(7);if(r&&r.split('/')[0]!=window.location.host){bm.f=escape(r);bm.v^=r.length}
+bm.v^=window.location.href.length;for(var x in bm) if(/^[vstcnwmydrf]$/.test(x)) bs[i++]=x+bm[x];
+bmD.write('<img src="http://c.bigmir.net/?'+bs.join('&')+'"  width="0" height="0" border="0" alt="bigmir)net TOP 100" title="bigmir)net TOP 100" />');
+//-->
+</script>
+<noscript><img src="http://c.bigmir.net/?v136757&s136757&t6" width="0" height="0" alt="" title="" border="0" /></noscript>
+<!--bigmir)net TOP 100 Part 1-->
+
+
+<!-- hit.ua -->
+<a href='http://hit.ua/?x=84735' target='_blank'>
+<script language="javascript" type="text/javascript"><!--
+Cd=document;Cr="&"+Math.random();Cp="&s=1";
+Cd.cookie="b=b";if(Cd.cookie)Cp+="&c=1";
+Cp+="&t="+(new Date()).getTimezoneOffset();
+if(self!=top)Cp+="&f=1";
+//--></script>
+<script language="javascript1.1" type="text/javascript"><!--
+if(navigator.javaEnabled())Cp+="&j=1";
+//--></script>
+<script language="javascript1.2" type="text/javascript"><!--
+if(typeof(screen)!='undefined')Cp+="&w="+screen.width+"&h="+
+screen.height+"&d="+(screen.colorDepth?screen.colorDepth:screen.pixelDepth);
+//--></script>
+<script language="javascript" type="text/javascript"><!--
+Cd.write("<img src='http://c.hit.ua/hit?i=84735&g=0&x=2"+Cp+Cr+
+"&r="+escape(Cd.referrer)+"&u="+escape(window.location.href)+
+"' border='0' wi"+"dth='1' he"+"ight='1'/>");
+//--></script>
+<noscript>
+<img src='http://c.hit.ua/hit?i=84735&amp;g=0&amp;x=2' border='0'/>
+</noscript></a>
+<!-- / hit.ua -->
+
+</div>
+
+</noindex>
+
+<script type="text/javascript">(function(w,doc) {
+if (!w.__utlWdgt ) {
+    w.__utlWdgt = true;
+    var d = doc, s = d.createElement('script'), g = 'getElementsByTagName';
+    s.type = 'text/javascript'; s.charset='UTF-8'; s.async = true;
+    s.src = ('https:' == w.location.protocol ? 'https' : 'http')  + '://w.uptolike.com/widgets/v1/uptolike.js';
+    var h=d[g]('body')[0];
+    h.appendChild(s);
+}})(window,document);
+</script>
+<div data-background-alpha="0.0" data-buttons-color="#FFFFFF" data-counter-background-color="#ffffff" data-share-counter-size="12" data-top-button="true" data-share-counter-type="disable" data-share-style="1" data-mode="share" data-like-text-enable="false" data-mobile-view="true" data-icon-color="#ffffff" data-orientation="fixed-left" data-text-color="#000000" data-share-shape="round-rectangle" data-sn-ids="fb.vk.tw.gp." data-share-size="30" data-background-color="#ffffff" data-preview-mobile="false" data-mobile-sn-ids="fb.vk.tw.wh.ok.gp." data-pid="1382258" data-counter-background-alpha="1.0" data-following-enable="false" data-exclude-show-more="true" data-selection-enable="true" class="uptolike-buttons" ></div>
+
+<!--ST: 0.065113067627
+MT: 0.0435185432434-->
+
+
+</body>
+</html>

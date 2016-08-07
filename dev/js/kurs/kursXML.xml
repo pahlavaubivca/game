@@ -1,0 +1,229 @@
+<!--This XML file does not appear to have any style information associated with it. The document tree is shown below.-->
+<NBU_GRVDataTable xmlns="http://buhgalter911.com/">
+<xs:schema xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" id="NewDataSet">
+<xs:element name="NewDataSet" msdata:IsDataSet="true" msdata:MainDataTable="NBU_GRV" msdata:UseCurrentLocale="true">
+<xs:complexType>
+<xs:choice minOccurs="0" maxOccurs="unbounded">
+<xs:element name="NBU_GRV">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="CodeDig" type="xs:string" minOccurs="0"/>
+<xs:element name="CodeLit" type="xs:string" minOccurs="0"/>
+<xs:element name="Amount" type="xs:int" minOccurs="0"/>
+<xs:element name="Exch" type="xs:decimal" minOccurs="0"/>
+<xs:element name="Date" type="xs:dateTime" minOccurs="0"/>
+<xs:element name="Name" type="xs:string" minOccurs="0"/>
+<xs:element name="Exch2" type="xs:decimal" minOccurs="0"/>
+<xs:element name="Date2" type="xs:dateTime" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+</xs:choice>
+</xs:complexType>
+</xs:element>
+</xs:schema>
+<diffgr:diffgram xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:diffgr="urn:schemas-microsoft-com:xml-diffgram-v1">
+<DocumentElement xmlns="">
+<NBU_GRV diffgr:id="NBU_GRV1" msdata:rowOrder="0">
+<CodeDig>036</CodeDig>
+<CodeLit>AUD</CodeLit>
+<Amount>100</Amount>
+<Exch>1625.1347</Exch>
+<Date>2015-06-14T00:00:00+03:00</Date>
+<Name>Австралійський долар</Name>
+</NBU_GRV>
+<NBU_GRV diffgr:id="NBU_GRV2" msdata:rowOrder="1">
+<CodeDig>944</CodeDig>
+<CodeLit>AZN</CodeLit>
+<Amount>100</Amount>
+<Exch>2007.0149</Exch>
+<Date>2015-06-14T00:00:00+03:00</Date>
+<Name>Азербайджанський манат</Name>
+</NBU_GRV>
+<NBU_GRV diffgr:id="NBU_GRV3" msdata:rowOrder="2">
+<CodeDig>826</CodeDig>
+<CodeLit>GBP</CodeLit>
+<Amount>100</Amount>
+<Exch>3250.4930</Exch>
+<Date>2015-06-14T00:00:00+03:00</Date>
+<Name>Англійський фунт стерлінгів</Name>
+</NBU_GRV>
+<NBU_GRV diffgr:id="NBU_GRV4" msdata:rowOrder="3">
+<CodeDig>974</CodeDig>
+<CodeLit>BYR</CodeLit>
+<Amount>10</Amount>
+<Exch>0.0137</Exch>
+<Date>2015-06-14T00:00:00+03:00</Date>
+<Name>Бiлоруський рубль</Name>
+</NBU_GRV>
+<NBU_GRV diffgr:id="NBU_GRV5" msdata:rowOrder="4">
+<CodeDig>208</CodeDig>
+<CodeLit>DKK</CodeLit>
+<Amount>100</Amount>
+<Exch>316.5369</Exch>
+<Date>2015-06-14T00:00:00+03:00</Date>
+<Name>Данська крона</Name>
+</NBU_GRV>
+<NBU_GRV diffgr:id="NBU_GRV6" msdata:rowOrder="5">
+<CodeDig>840</CodeDig>
+<CodeLit>USD</CodeLit>
+<Amount>100</Amount>
+<Exch>2102.7495</Exch>
+<Date>2015-06-14T00:00:00+03:00</Date>
+<Name>Долар США</Name>
+</NBU_GRV>
+<NBU_GRV diffgr:id="NBU_GRV7" msdata:rowOrder="6">
+<CodeDig>978</CodeDig>
+<CodeLit>EUR</CodeLit>
+<Amount>100</Amount>
+<Exch>2361.8082</Exch>
+<Date>2015-06-14T00:00:00+03:00</Date>
+<Name>Євро</Name>
+</NBU_GRV>
+<NBU_GRV diffgr:id="NBU_GRV8" msdata:rowOrder="7">
+<CodeDig>352</CodeDig>
+<CodeLit>ISK</CodeLit>
+<Amount>100</Amount>
+<Exch>15.8662</Exch>
+<Date>2015-06-14T00:00:00+03:00</Date>
+<Name>Ісландська крона</Name>
+</NBU_GRV>
+<NBU_GRV diffgr:id="NBU_GRV9" msdata:rowOrder="8">
+<CodeDig>398</CodeDig>
+<CodeLit>KZT</CodeLit>
+<Amount>100</Amount>
+<Exch>11.3021</Exch>
+<Date>2015-06-14T00:00:00+03:00</Date>
+<Name>Казахстаньський теньге</Name>
+</NBU_GRV>
+<NBU_GRV diffgr:id="NBU_GRV10" msdata:rowOrder="9">
+<CodeDig>124</CodeDig>
+<CodeLit>CAD</CodeLit>
+<Amount>100</Amount>
+<Exch>1706.6322</Exch>
+<Date>2015-06-14T00:00:00+03:00</Date>
+<Name>Канадський долар</Name>
+</NBU_GRV>
+<NBU_GRV diffgr:id="NBU_GRV11" msdata:rowOrder="10">
+<CodeDig>498</CodeDig>
+<CodeLit>MDL</CodeLit>
+<Amount>100</Amount>
+<Exch>115.9012</Exch>
+<Date>2015-06-14T00:00:00+03:00</Date>
+<Name>Молдовський лей</Name>
+</NBU_GRV>
+<NBU_GRV diffgr:id="NBU_GRV12" msdata:rowOrder="11">
+<CodeDig>578</CodeDig>
+<CodeLit>NOK</CodeLit>
+<Amount>100</Amount>
+<Exch>268.8150</Exch>
+<Date>2015-06-14T00:00:00+03:00</Date>
+<Name>Норвезька крона</Name>
+</NBU_GRV>
+<NBU_GRV diffgr:id="NBU_GRV13" msdata:rowOrder="12">
+<CodeDig>985</CodeDig>
+<CodeLit>PLN</CodeLit>
+<Amount>100</Amount>
+<Exch>570.4162</Exch>
+<Date>2015-06-14T00:00:00+03:00</Date>
+<Name>Польський злотий</Name>
+</NBU_GRV>
+<NBU_GRV diffgr:id="NBU_GRV14" msdata:rowOrder="13">
+<CodeDig>643</CodeDig>
+<CodeLit>RUB</CodeLit>
+<Amount>10</Amount>
+<Exch>3.8562</Exch>
+<Date>2015-06-14T00:00:00+03:00</Date>
+<Name>Російський рубль</Name>
+</NBU_GRV>
+<NBU_GRV diffgr:id="NBU_GRV15" msdata:rowOrder="14">
+<CodeDig>702</CodeDig>
+<CodeLit>SGD</CodeLit>
+<Amount>100</Amount>
+<Exch>1560.4944</Exch>
+<Date>2015-06-14T00:00:00+03:00</Date>
+<Name>Сінгапурський долар</Name>
+</NBU_GRV>
+<NBU_GRV diffgr:id="NBU_GRV16" msdata:rowOrder="15">
+<CodeDig>960</CodeDig>
+<CodeLit>XDR</CodeLit>
+<Amount>100</Amount>
+<Exch>2956.6593</Exch>
+<Date>2015-06-14T00:00:00+03:00</Date>
+<Name>Спецiальнi права запозичення</Name>
+</NBU_GRV>
+<NBU_GRV diffgr:id="NBU_GRV17" msdata:rowOrder="16">
+<CodeDig>949</CodeDig>
+<CodeLit>TRY</CodeLit>
+<Amount>100</Amount>
+<Exch>768.0927</Exch>
+<Date>2015-06-14T00:00:00+03:00</Date>
+<Name>Турецька ліра</Name>
+</NBU_GRV>
+<NBU_GRV diffgr:id="NBU_GRV18" msdata:rowOrder="17">
+<CodeDig>934</CodeDig>
+<CodeLit>TMT</CodeLit>
+<Amount>100</Amount>
+<Exch>600.7856</Exch>
+<Date>2015-06-14T00:00:00+03:00</Date>
+<Name>Туркменський манат</Name>
+</NBU_GRV>
+<NBU_GRV diffgr:id="NBU_GRV19" msdata:rowOrder="18">
+<CodeDig>348</CodeDig>
+<CodeLit>HUF</CodeLit>
+<Amount>1000</Amount>
+<Exch>75.6481</Exch>
+<Date>2015-06-14T00:00:00+03:00</Date>
+<Name>Угорський форинт</Name>
+</NBU_GRV>
+<NBU_GRV diffgr:id="NBU_GRV20" msdata:rowOrder="19">
+<CodeDig>860</CodeDig>
+<CodeLit>UZS</CodeLit>
+<Amount>100</Amount>
+<Exch>0.8273</Exch>
+<Date>2015-06-14T00:00:00+03:00</Date>
+<Name>Узбецький сум</Name>
+</NBU_GRV>
+<NBU_GRV diffgr:id="NBU_GRV21" msdata:rowOrder="20">
+<CodeDig>203</CodeDig>
+<CodeLit>CZK</CodeLit>
+<Amount>100</Amount>
+<Exch>86.4561</Exch>
+<Date>2015-06-14T00:00:00+03:00</Date>
+<Name>Чеська крона</Name>
+</NBU_GRV>
+<NBU_GRV diffgr:id="NBU_GRV22" msdata:rowOrder="21">
+<CodeDig>752</CodeDig>
+<CodeLit>SEK</CodeLit>
+<Amount>100</Amount>
+<Exch>255.1706</Exch>
+<Date>2015-06-14T00:00:00+03:00</Date>
+<Name>Шведська крона</Name>
+</NBU_GRV>
+<NBU_GRV diffgr:id="NBU_GRV23" msdata:rowOrder="22">
+<CodeDig>756</CodeDig>
+<CodeLit>CHF</CodeLit>
+<Amount>100</Amount>
+<Exch>2244.4248</Exch>
+<Date>2015-06-14T00:00:00+03:00</Date>
+<Name>Швейцарський франк</Name>
+</NBU_GRV>
+<NBU_GRV diffgr:id="NBU_GRV24" msdata:rowOrder="23">
+<CodeDig>156</CodeDig>
+<CodeLit>CNY</CodeLit>
+<Amount>100</Amount>
+<Exch>338.8194</Exch>
+<Date>2015-06-14T00:00:00+03:00</Date>
+<Name>Юань Женьмiньбi</Name>
+</NBU_GRV>
+<NBU_GRV diffgr:id="NBU_GRV25" msdata:rowOrder="24">
+<CodeDig>392</CodeDig>
+<CodeLit>JPY</CodeLit>
+<Amount>1000</Amount>
+<Exch>169.9754</Exch>
+<Date>2015-06-14T00:00:00+03:00</Date>
+<Name>Японська єна</Name>
+</NBU_GRV>
+</DocumentElement>
+</diffgr:diffgram>
+</NBU_GRVDataTable>

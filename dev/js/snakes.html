@@ -1,0 +1,84 @@
+<html>
+<head>
+</head>
+<body>
+<canvas id="field" width="500" height="400"
+        style="position:fixed;top:0px;left:0px;width:500px;height:400px;border:2px solid;"></canvas>
+<!--<div id="snake1" style="position: absolute;width:4px ;height: 4px;background-color: red;"></div>-->
+<!--<div id="snake2" style="position: absolute;width:4px ;height: 4px;background-color: blue;"></div>-->
+<script type="text/javascript">
+
+    /*function a() {
+     var snake1 = document.getElementById('snake1');
+     var snake2 = document.getElementById('snake2');
+
+     function move(snake, step) {
+     var t = step;
+     while (true) {
+     step++;
+     snake.style.left = step + 'px';
+     if (step > (t + 100)) {
+     t = 0;
+     return false;
+     }
+     }
+     }
+
+     move(snake1, 40);
+     move(snake2, 69);
+     }
+     a()*/
+
+    (function () {
+        var canvas = document.getElementById('field');
+        var ctx = canvas.getContext('2d');
+        ctx.beginPath();
+        var x = 20, y = 15, randomValue = 0, count = 0, step = 5, massPointsX = [], massPointsY = [];
+        ctx.moveTo(x, y);
+        ctx.lineWidth = 3;
+        ctx.strokeStyle = "#ff0000";
+        function random() {
+            randomValue = Math.floor(Math.random() * (2 - 0) + 0);
+        }
+
+        function move() {
+            function loop() {
+                random();
+                if (randomValue == 1) {
+                    random();
+                    if (randomValue == 1) {
+                        x = x + step;
+                    }
+                    else if (randomValue == 0) {
+                        x = x - step;
+                    }
+                }
+                else if (randomValue == 0) {
+                    random();
+                    if (randomValue == 1) {
+                        y = y + step;
+                    }
+                    else if (randomValue == 0) {
+                        y = y - step;
+                    }
+                }
+                massPointsX.push(x);
+                massPointsY.push(y);
+                count++;
+
+                ctx.lineTo(x, y);
+                ctx.stroke();
+                if (count > 100) {
+                    count = 0;
+                    clearInterval(loopInterval);
+                }
+            }
+
+            var loopInterval = setInterval(loop, 50);
+        }
+
+        move();
+    })();
+</script>
+</body>
+</html>
