@@ -1,123 +1,112 @@
 /**
- * Created by kitpes on 11.09.2016.
+ * Created by pahlavaubivca on 11.09.2016.
  */
 var compileObj = {};
 
+/**
+ *
+* */
 compileObj.init = function () {
-    var canvas = document.getElementById("canvas");
-    var field = canvas.getContext("2d");
-    compileObj.canvas = canvas;
-
-    if (compileObj.defaults) {
-        var param = compileObj.defaults;
-
-        field.fillStyle = param.field.color;
-        field.fillRect(0, 0, param.field.width, param.field.height);
-        field.fill();
-    }
+    if(!compileObj.canvas){compileObj.canvas = document.getElementById("canvas");}
+    compileObj.canvas.width = window.innerWidth;
+    compileObj.canvas.height = window.innerHeight;
+    compileObj.canvas.style.backgroundColor = 'rgba(0,0,0,0.5)';
 };
-compileObj.defaults = (function () {
-    return {
-        "field": {
-            "obstruction": {
-                "meteor": {}
-            },
-            "width": window.innerWidth,
-            "height": window.innerHeight,
-            "color": "black"
-        },
-        "unit": {
-            "enemy": {},
-            "nps": {},
-            "GG": {
-                "physicalCharact": {
-                    "width": 50,
-                    "height": 25,
-                    "weight": 3,
-                    "position": {
-                        "x": 600,
-                        "y": 100
-                    },
-                    "leftM": false,
-                    "rightM": false,
-                    "topM": false,
-                    "downM": false,
-                    "fire": false
 
-                },
-                "level": {
-                    "life": 3,
-                    "speed": 1,
-                    "armor": 1,
-                    "weapon": "",
-                    "shield": 0,
-                    "hull": "standart"
-                }
+/**
+ * det json with defaults value, and convert to object
+ * @constructor
+* */
+compileObj.defaults = function (resp) {
+    if(resp){
+        compileObj.defaults = JSON.parse(resp);
+        compileObj.registerAction();
+        compileObj.init();
+    } else {
+        var xhr = new XMLHttpRequest();
+        xhr.open("GET", "init.json");
+        xhr.send();
+        xhr.onload = function () {
+            if (xhr.status == 200) {
+                compileObj.defaults(xhr.response);
             }
-
-        },
-        "hull": {
-            "standart": {},
-            "light": {},
-            "middle": {},
-            "heavy": {},
-            "terminator": {}
-        },
-        "weapon": {
-            "standart": {},
-            "atomatic": {},
-            "shotgun": {},
-            "epicShotgun": {},
-            "missile": {},
-            "laser": {},
-            "mrp": {},
-            "doom": {}
-        }
+        };
     }
-})();
+};
+compileObj.defaults();
 
-compileObj.GG = function () {
-    var ship = compileObj.defaults.canvas.getContext("2d");
-    var ggParam = compileObj.defaults.unit.GG;
-    var ggPos = ggParam.physicalCharact;
-    ship.fillRect(ggPos.position.x, ggPos.position.y, ggPos.width, ggPos.height);
+compileObj.mainHero = function () {
+    var ship = compileObj.canvas.getContext("2d");
+    var mhParam = compileObj.defaults.unit.mainHero;
+    var mhPos = mhParam.physicalCharact;
+    ship.fillStyle='red';
+    ship.fillRect(mhPos.position.x, mhPos.position.y, mhPos.width, mhPos.height);
+    ship.fill();
 };
 
+compileObj.enemy = function(){
+    var ship = compileObj.defaults.canvas.getContext("2d");
+    var enemyParam = compileObj.defaults.unit.enemy;
+    var enemyPosition = enemyParam.physicalCharact
+};
 
-compileObj.registerAction = (function () {
-    var action = compileObj.defaults.unit.GG.physicalCharact;
+/**
+ * register button action from player
+ * @constructor
+* */
+compileObj.registerAction = function () {
+    var action = compileObj.defaults.unit.mainHero.physicalCharact;
     window.addEventListener('keydown', function (event) {
-        event.keyCode == 37 ? action.leftM = true : action.leftM;
-        event.keyCode == 39 ? action.rightM = true : action.rightM;
-        event.keyCode == 87 ? action.topM = true : action.topM;
-        event.keyCode == 83 ? action.downM = true : action.downM;
+
+        event.keyCode == 65 ? action.leftMove = true : action.leftMove;
+        event.keyCode == 68 ? action.rightMove = true : action.rightMove;
+        event.keyCode == 87 ? action.topMove = true : action.topMove;
+        event.keyCode == 83 ? action.downMove = true : action.downMove;
     });
     window.addEventListener("click", function () {
         action.fire = true;
     });
-    window.addEventListener('keyUp', function (event) {
-        event.keyCode == 37 ? action.leftM = false : action.leftM;
-        event.keyCode == 39 ? action.rightM = false : action.rightM;
-        event.keyCode == 87 ? action.topM = false : action.topM;
-        event.keyCode == 83 ? action.downM = false : action.downM;
+    window.addEventListener('keyup', function (event) {
+
+        event.keyCode == 65 ? action.leftMove = false : action.leftMove;
+        event.keyCode == 68 ? action.rightMove = false : action.rightMove;
+        event.keyCode == 87 ? action.topMove = false : action.topMove;
+        event.keyCode == 83 ? action.downMove = false : action.downMove;
     })
-})();
+};
 
+/**
+* determine move unit, if is active
+ * @constructor
+* */
 compileObj.move = function () {
-
-};
-
-compileObj.draw = function () {
-
-};
-compileObj.callMethods = (function () {
-    compileObj.init();
-    for(var key in compileObj.unit){
-        if(compileObj.defaults.unit.hasOwnProperty(key)){
-            compileObj.defaults.unit[key]["context"] = compileObj.canvas.getContext('2d');
+    if(!compileObj.du) compileObj.du = compileObj.defaults.unit;
+    for(var key in compileObj.du){
+        if(compileObj.du.hasOwnProperty(key) && compileObj.du[key].active){
+            compileObj.du[key]['physicalCharact']['leftMove'] == true ? compileObj.du[key]['physicalCharact'].position.x -= compileObj.du[key]['physicalCharact'].step : 0;
+            compileObj.du[key]['physicalCharact']['rightMove'] == true ? compileObj.du[key]['physicalCharact'].position.x += compileObj.du[key]['physicalCharact'].step : 0;
+            compileObj.du[key]['physicalCharact']['topMove'] == true ? compileObj.du[key]['physicalCharact'].position.y -= compileObj.du[key]['physicalCharact'].step : 0;
+            compileObj.du[key]['physicalCharact']['downMove'] == true ? compileObj.du[key]['physicalCharact'].position.y += compileObj.du[key]['physicalCharact'].step : 0;
         }
     }
-})();
-window.requestAnimationFrame(function(event){
-   console.log(event)
-});
+};
+
+/**
+ * draw all elements : GG, enemys, nps, bullets
+ * @constructor
+* */
+compileObj.draw = function () {
+    if(compileObj.canvas) {
+        compileObj.init();
+        compileObj.move();
+        compileObj.mainHero();
+    }
+    window.requestAnimationFrame(function(event){
+        compileObj.draw();
+    });
+
+};
+compileObj.draw();
+
+
+

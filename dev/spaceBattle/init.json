@@ -1,0 +1,99 @@
+{
+  "field": {
+    "obstruction": {
+      "meteor": {}
+    },
+    "width": "window.innerWidth",
+    "height": "window.innerHeight",
+    "color": "black"
+  },
+  "unit": {
+    "enemy": {
+      "active":false,
+      "physicalCharact": {
+        "width": 25,
+        "height": 15,
+        "weight": 1,
+        "position": {
+          "x": 150,
+          "y": 5
+        },
+        "step":1,
+        "leftM": false,
+        "rightM": false,
+        "topM": false,
+        "downM": false,
+        "fire": false
+      },
+      "level": {
+      }
+    },
+    "nps": {
+      "active":false,
+      "physicalCharact": {
+        "width": 25,
+        "height": 15,
+        "weight": 1,
+        "position": {
+          "x": 550,
+          "y": 115
+        },
+        "step": 1,
+        "leftM": false,
+        "rightM": false,
+        "topM": false,
+        "downM": false,
+        "fire": false
+      },
+      "level": {
+      }
+    },
+    "mainHero": {
+      "active":true,
+      "physicalCharact": {
+        "width": 50,
+        "height": 50,
+        "weight": 3,
+        "position": {
+          "x": 0,
+          "y": 0
+        },
+        "step":2,
+        "leftMove": false,
+        "rightMove": false,
+        "topMove": false,
+        "downMove": false,
+        "fire": false
+      },
+      "level": {
+        "life": 3,
+        "speed": 1,
+        "armor": 1,
+        "weapon": "",
+        "shield": 0,
+        "hull": "standart"
+      }
+    },
+    "bullet":{
+      "active":false
+    }
+  },
+  "hull": {
+    "standart": {},
+    "light": {},
+    "middle": {},
+    "heavy": {},
+    "terminator": {}
+  },
+  "weapon": {
+    "standart": {},
+    "atomatic": {},
+    "shotgun": {},
+    "epicShotgun": {},
+    "missile": {},
+    "laser": {},
+    "mrp": {},
+    "doom": {}
+  }
+
+}
