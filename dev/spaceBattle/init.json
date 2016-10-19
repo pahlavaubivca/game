@@ -5,7 +5,7 @@
     },
     "width": "window.innerWidth",
     "height": "window.innerHeight",
-    "color": "black"
+    "color": 0
   },
   "unit": {
     "enemy": {
@@ -14,6 +14,7 @@
         "width": 25,
         "height": 15,
         "weight": 1,
+        "texture":"&&&navy",
         "position": {
           "x": 150,
           "y": 5
@@ -34,6 +35,7 @@
         "width": 25,
         "height": 15,
         "weight": 1,
+        "texture":"&&&blue",
         "position": {
           "x": 550,
           "y": 115
@@ -54,11 +56,13 @@
         "width": 50,
         "height": 50,
         "weight": 3,
+        "texture":"&&&red",
         "position": {
           "x": 0,
-          "y": 0
+          "y": "window.innerHeight-100"
         },
-        "step":2,
+        "stepx":6 ,
+        "stepy":2,
         "leftMove": false,
         "rightMove": false,
         "topMove": false,
@@ -71,11 +75,27 @@
         "armor": 1,
         "weapon": "",
         "shield": 0,
-        "hull": "standart"
+        "hull": "&&&standart"
       }
     },
     "bullet":{
-      "active":false
+      "active":false,
+      "physicalCharact": {
+        "width": 5,
+        "height": 5,
+        "weight": 1,
+        "texture":"&&&green",
+        "position": {
+          "x": 0,
+          "y": 0
+        },
+        "stepx":0 ,
+        "stepy":20,
+        "leftMove": false,
+        "rightMove": false,
+        "topMove": false,
+        "downMove": false
+      }
     }
   },
   "hull": {

@@ -6,10 +6,10 @@ var compileObj = {};
 /**
  *
 * */
-compileObj.init = function () {
+compileObj.field = function () {
     if(!compileObj.canvas){compileObj.canvas = document.getElementById("canvas");}
-    compileObj.canvas.width = window.innerWidth;
-    compileObj.canvas.height = window.innerHeight;
+    compileObj.canvas.width = compileObj.defaults.field.width;/*window.innerWidth;*/
+    compileObj.canvas.height = compileObj.defaults.field.height;
     compileObj.canvas.style.backgroundColor = 'rgba(0,0,0,0.5)';
 };
 
@@ -20,8 +20,9 @@ compileObj.init = function () {
 compileObj.defaults = function (resp) {
     if(resp){
         compileObj.defaults = JSON.parse(resp);
+        compileObj.compileDefauls(compileObj.defaults);
         compileObj.registerAction();
-        compileObj.init();
+        compileObj.field();
     } else {
         var xhr = new XMLHttpRequest();
         xhr.open("GET", "init.json");
@@ -33,23 +34,73 @@ compileObj.defaults = function (resp) {
         };
     }
 };
-compileObj.defaults();
 
-compileObj.mainHero = function () {
+compileObj.compileDefauls = function(obj){
+    var obj = obj || {};
+    for(var key in obj){
+        if(obj.hasOwnProperty(key)){
+            if(obj[key].constructor == String) {
+                if(obj[key].match(/(&&&)/)){
+                    obj[key] = obj[key].replace(/&&&/,'');
+                } else {
+                    obj[key] = new Function("return " + obj[key] + "")();
+                }
+            } else if(obj[key].constructor==Object){
+                compileObj.compileDefauls(obj[key]);
+            }
+        }
+    }
+};
+
+
+compileObj.draw = function () {
     var ship = compileObj.canvas.getContext("2d");
-    var mhParam = compileObj.defaults.unit.mainHero;
-    var mhPos = mhParam.physicalCharact;
-    ship.fillStyle='red';
-    ship.fillRect(mhPos.position.x, mhPos.position.y, mhPos.width, mhPos.height);
-    ship.fill();
+    var unitParam = compileObj.defaults.unit;
+    for (var key in unitParam) {
+        if (unitParam.hasOwnProperty(key) && unitParam[key].active) {
+            ship.fillStyle = unitParam[key].physicalCharact.texture;
+            ship.fillRect(unitParam[key].physicalCharact.position.x, unitParam[key].physicalCharact.position.y, unitParam[key].physicalCharact.width, unitParam[key].physicalCharact.height);
+            ship.fill();
+        }
+    }
 };
 
-compileObj.enemy = function(){
-    var ship = compileObj.defaults.canvas.getContext("2d");
-    var enemyParam = compileObj.defaults.unit.enemy;
-    var enemyPosition = enemyParam.physicalCharact
+compileObj.collision = function(){
+
+};
+compileObj.random = function(wat){
+  if(wat == "color"){
+      var hex = [0,1,2,3,4,5,6,7,8,9,'a','b','c','d','f','e'];
+      var color = '#';
+      while(color.length<4){color+=hex[Math.floor(Math.random()*(hex.length-0)+0)]};
+      return color
+  }
+  if(wat == "position"){
+
+  }
 };
 
+compileObj.generatorElements = function (type) {
+    if (type == "enemy") {
+        compileObj.defaults.unit['enemy' + new Date().getTime()] = {
+            "active": false,
+            "physicalCharact": {
+                "width": 25,
+                "height": 15,
+                "weight": 1,
+                "texture": compileObj.random("color"),
+                "position": compileObj.random("position"),
+                "step": 1,
+                "leftM": false,
+                "rightM": false,
+                "topM": false,
+                "downM": false,
+                "fire": false
+            },
+            "level": {}
+        }
+    }
+};
 /**
  * register button action from player
  * @constructor
@@ -83,10 +134,10 @@ compileObj.move = function () {
     if(!compileObj.du) compileObj.du = compileObj.defaults.unit;
     for(var key in compileObj.du){
         if(compileObj.du.hasOwnProperty(key) && compileObj.du[key].active){
-            compileObj.du[key]['physicalCharact']['leftMove'] == true ? compileObj.du[key]['physicalCharact'].position.x -= compileObj.du[key]['physicalCharact'].step : 0;
-            compileObj.du[key]['physicalCharact']['rightMove'] == true ? compileObj.du[key]['physicalCharact'].position.x += compileObj.du[key]['physicalCharact'].step : 0;
-            compileObj.du[key]['physicalCharact']['topMove'] == true ? compileObj.du[key]['physicalCharact'].position.y -= compileObj.du[key]['physicalCharact'].step : 0;
-            compileObj.du[key]['physicalCharact']['downMove'] == true ? compileObj.du[key]['physicalCharact'].position.y += compileObj.du[key]['physicalCharact'].step : 0;
+            compileObj.du[key]['physicalCharact']['leftMove'] == true ? compileObj.du[key]['physicalCharact'].position.x -= compileObj.du[key]['physicalCharact'].stepx : 0;
+            compileObj.du[key]['physicalCharact']['rightMove'] == true ? compileObj.du[key]['physicalCharact'].position.x += compileObj.du[key]['physicalCharact'].stepx : 0;
+            compileObj.du[key]['physicalCharact']['topMove'] == true ? compileObj.du[key]['physicalCharact'].position.y -= compileObj.du[key]['physicalCharact'].stepy : 0;
+            compileObj.du[key]['physicalCharact']['downMove'] == true ? compileObj.du[key]['physicalCharact'].position.y += compileObj.du[key]['physicalCharact'].stepy : 0;
         }
     }
 };
@@ -95,18 +146,37 @@ compileObj.move = function () {
  * draw all elements : GG, enemys, nps, bullets
  * @constructor
 * */
-compileObj.draw = function () {
+compileObj.runOnce = function(){
+    compileObj.defaults();
+};
+compileObj.runOnce();
+
+
+compileObj.finish = function () {
     if(compileObj.canvas) {
-        compileObj.init();
+        compileObj.field();
         compileObj.move();
-        compileObj.mainHero();
+        compileObj.draw();
     }
     window.requestAnimationFrame(function(event){
-        compileObj.draw();
+        compileObj.finish();
+        if(!lastCalledTime) {
+            lastCalledTime = Date.now();
+            fps = 0;
+            return;
+        }
+        delta = (Date.now() - lastCalledTime)/1000;
+        lastCalledTime = Date.now();
+        fps = 1/delta;
     });
-
 };
-compileObj.draw();
+compileObj.finish();
+
+
+var fps = 0,lastCalledTime=0;
+var divfps = document.getElementById('fps');
+setInterval(function(){divfps.innerHTML = fps;},500);
+
 
 
 
