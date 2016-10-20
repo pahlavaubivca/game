@@ -66,7 +66,41 @@ compileObj.draw = function () {
 };
 
 compileObj.collision = function(){
-
+    for(var key in compileObj.defaults.unit){
+        if(compileObj.defaults.unit.hasOwnProperty(key) && compileObj.defaults.unit[key].active){
+            if(key=="mainHero"){
+                if(compileObj.defaults.unit[key].physicalCharact.position.x<0){
+                    compileObj.defaults.unit[key].physicalCharact.position.x=0;
+                } else if (compileObj.defaults.unit[key].physicalCharact.position.x>compileObj.defaults.field.width-compileObj.defaults.unit[key].physicalCharact.width){
+                    compileObj.defaults.unit[key].physicalCharact.position.x=compileObj.defaults.field.width-compileObj.defaults.unit[key].physicalCharact.width;
+                }
+                if(compileObj.defaults.unit[key].physicalCharact.position.y<0){
+                    compileObj.defaults.unit[key].physicalCharact.position.y=0;
+                } else if (compileObj.defaults.unit[key].physicalCharact.position.y>compileObj.defaults.field.height-compileObj.defaults.unit[key].physicalCharact.height){
+                    compileObj.defaults.unit[key].physicalCharact.position.y=compileObj.defaults.field.height-compileObj.defaults.unit[key].physicalCharact.height;
+                }
+            } else {
+                if(compileObj.defaults.unit[key].physicalCharact.position.x<0){
+                    compileObj.defaults.unit[key].physicalCharact.position.x=0;
+                    compileObj.defaults.unit[key].physicalCharact.leftMove=false;
+                    compileObj.defaults.unit[key].physicalCharact.rightMove=true;
+                } else if (compileObj.defaults.unit[key].physicalCharact.position.x>compileObj.defaults.field.width-compileObj.defaults.unit[key].physicalCharact.width){
+                    compileObj.defaults.unit[key].physicalCharact.position.x=compileObj.defaults.field.width-compileObj.defaults.unit[key].physicalCharact.width;
+                    compileObj.defaults.unit[key].physicalCharact.leftMove=true;
+                    compileObj.defaults.unit[key].physicalCharact.rightMove=false;
+                }
+                if(compileObj.defaults.unit[key].physicalCharact.position.y<0){
+                    compileObj.defaults.unit[key].physicalCharact.position.y=0;
+                    compileObj.defaults.unit[key].physicalCharact.topMove=false;
+                    compileObj.defaults.unit[key].physicalCharact.downMove=true;
+                } else if (compileObj.defaults.unit[key].physicalCharact.position.y>compileObj.defaults.field.height-compileObj.defaults.unit[key].physicalCharact.height){
+                    compileObj.defaults.unit[key].physicalCharact.position.y=compileObj.defaults.field.height-compileObj.defaults.unit[key].physicalCharact.height;
+                    compileObj.defaults.unit[key].physicalCharact.topMove=true;
+                    compileObj.defaults.unit[key].physicalCharact.downMove=false;
+                }
+            }
+        }
+    }
 };
 compileObj.random = function(wat){
   if(wat == "color"){
@@ -75,32 +109,42 @@ compileObj.random = function(wat){
       while(color.length<4){color+=hex[Math.floor(Math.random()*(hex.length-0)+0)]};
       return color
   }
-  if(wat == "position"){
-
+  if(wat == "enemyPosition"){
+      return {
+          "x": (function () {
+              return Math.random() * ((compileObj.defaults.field.width - 100) - 0) + 0;//remove 100 its hardcode
+          })(),
+          "y": (function () {
+              return Math.random() * ((compileObj.defaults.field.height / 2) - 0) + 0;
+          })()
+      }
+  }
+  if(wat == "step"){
+      return Math.floor(Math.random()*(5-1)+1);
   }
 };
 
-compileObj.generatorElements = function (type) {
-    if (type == "enemy") {
-        compileObj.defaults.unit['enemy' + new Date().getTime()] = {
-            "active": false,
-            "physicalCharact": {
-                "width": 25,
-                "height": 15,
-                "weight": 1,
-                "texture": compileObj.random("color"),
-                "position": compileObj.random("position"),
-                "step": 1,
-                "leftM": false,
-                "rightM": false,
-                "topM": false,
-                "downM": false,
-                "fire": false
-            },
-            "level": {}
-        }
+compileObj.generatorEnemy = function () {
+    compileObj.defaults.unit['enemy' + new Date().getTime()] = {
+        "active": true,
+        "physicalCharact": {
+            "width": 25,
+            "height": 15,
+            "weight": 1,
+            "texture": compileObj.random("color"),
+            "position": compileObj.random("enemyPosition"),
+            "stepx": compileObj.random("step"),
+            "stepy":compileObj.random("step"),
+            "leftMove": false,
+            "rightMove": true,
+            "topMove": false,
+            "downMove": true,
+            "fire": false
+        },
+        "level": {}
     }
 };
+
 /**
  * register button action from player
  * @constructor
@@ -148,6 +192,18 @@ compileObj.move = function () {
 * */
 compileObj.runOnce = function(){
     compileObj.defaults();
+    var count=1;
+    var interval = setInterval((function () {
+        if (compileObj.defaults.constructor == Object) {
+            compileObj.generatorEnemy();
+            console.log('enemy');
+            if(count>40) {
+                clearInterval(interval);
+            }
+            count++;
+        }
+    }), 10)
+
 };
 compileObj.runOnce();
 
@@ -156,6 +212,7 @@ compileObj.finish = function () {
     if(compileObj.canvas) {
         compileObj.field();
         compileObj.move();
+        compileObj.collision();
         compileObj.draw();
     }
     window.requestAnimationFrame(function(event){

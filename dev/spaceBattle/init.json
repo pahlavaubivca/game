@@ -19,11 +19,12 @@
           "x": 150,
           "y": 5
         },
-        "step":1,
-        "leftM": false,
-        "rightM": false,
-        "topM": false,
-        "downM": false,
+        "stepx":6,
+        "stepy":6,
+        "leftMove": false,
+        "rightMove": false,
+        "topMove": false,
+        "downMove": false,
         "fire": false
       },
       "level": {
@@ -62,7 +63,7 @@
           "y": "window.innerHeight-100"
         },
         "stepx":6 ,
-        "stepy":2,
+        "stepy":6,
         "leftMove": false,
         "rightMove": false,
         "topMove": false,
