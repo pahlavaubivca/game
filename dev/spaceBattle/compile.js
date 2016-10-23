@@ -50,6 +50,8 @@ compileObj.compileDefauls = function(obj){
             }
         }
     }
+    compileObj.arrayCheckedElement = [];
+
 };
 
 
@@ -65,42 +67,90 @@ compileObj.draw = function () {
     }
 };
 
-compileObj.collision = function(){
-    for(var key in compileObj.defaults.unit){
-        if(compileObj.defaults.unit.hasOwnProperty(key) && compileObj.defaults.unit[key].active){
-            if(key=="mainHero"){
-                if(compileObj.defaults.unit[key].physicalCharact.position.x<0){
-                    compileObj.defaults.unit[key].physicalCharact.position.x=0;
-                } else if (compileObj.defaults.unit[key].physicalCharact.position.x>compileObj.defaults.field.width-compileObj.defaults.unit[key].physicalCharact.width){
-                    compileObj.defaults.unit[key].physicalCharact.position.x=compileObj.defaults.field.width-compileObj.defaults.unit[key].physicalCharact.width;
+compileObj.collision = function () {
+    for (var key in compileObj.defaults.unit) {
+        if (compileObj.defaults.unit.hasOwnProperty(key) && compileObj.defaults.unit[key].active) {
+            var CDUP = compileObj.defaults.unit[key].physicalCharact;
+            if (key == "mainHero") {
+                if (CDUP.position.x < 0) {
+                    CDUP.position.x = 0;
+                } else if (CDUP.position.x > compileObj.defaults.field.width - CDUP.width) {
+                    CDUP.position.x = compileObj.defaults.field.width - CDUP.width;
                 }
-                if(compileObj.defaults.unit[key].physicalCharact.position.y<0){
-                    compileObj.defaults.unit[key].physicalCharact.position.y=0;
-                } else if (compileObj.defaults.unit[key].physicalCharact.position.y>compileObj.defaults.field.height-compileObj.defaults.unit[key].physicalCharact.height){
-                    compileObj.defaults.unit[key].physicalCharact.position.y=compileObj.defaults.field.height-compileObj.defaults.unit[key].physicalCharact.height;
+                if (CDUP.position.y < 0) {
+                    CDUP.position.y = 0;
+                } else if (CDUP.position.y > compileObj.defaults.field.height - CDUP.height) {
+                    CDUP.position.y = compileObj.defaults.field.height - CDUP.height;
                 }
             } else {
-                if(compileObj.defaults.unit[key].physicalCharact.position.x<0){
-                    compileObj.defaults.unit[key].physicalCharact.position.x=0;
-                    compileObj.defaults.unit[key].physicalCharact.leftMove=false;
-                    compileObj.defaults.unit[key].physicalCharact.rightMove=true;
-                } else if (compileObj.defaults.unit[key].physicalCharact.position.x>compileObj.defaults.field.width-compileObj.defaults.unit[key].physicalCharact.width){
-                    compileObj.defaults.unit[key].physicalCharact.position.x=compileObj.defaults.field.width-compileObj.defaults.unit[key].physicalCharact.width;
-                    compileObj.defaults.unit[key].physicalCharact.leftMove=true;
-                    compileObj.defaults.unit[key].physicalCharact.rightMove=false;
+                if (CDUP.position.x < 0) {
+                    CDUP.position.x = 0;
+                    CDUP.leftMove = false;
+                    CDUP.rightMove = true;
+                } else if (CDUP.position.x > compileObj.defaults.field.width - CDUP.width) {
+                    CDUP.position.x = compileObj.defaults.field.width - CDUP.width;
+                    CDUP.leftMove = true;
+                    CDUP.rightMove = false;
                 }
-                if(compileObj.defaults.unit[key].physicalCharact.position.y<0){
-                    compileObj.defaults.unit[key].physicalCharact.position.y=0;
-                    compileObj.defaults.unit[key].physicalCharact.topMove=false;
-                    compileObj.defaults.unit[key].physicalCharact.downMove=true;
-                } else if (compileObj.defaults.unit[key].physicalCharact.position.y>compileObj.defaults.field.height-compileObj.defaults.unit[key].physicalCharact.height){
-                    compileObj.defaults.unit[key].physicalCharact.position.y=compileObj.defaults.field.height-compileObj.defaults.unit[key].physicalCharact.height;
-                    compileObj.defaults.unit[key].physicalCharact.topMove=true;
-                    compileObj.defaults.unit[key].physicalCharact.downMove=false;
+                if (CDUP.position.y < 0) {
+                    CDUP.position.y = 0;
+                    CDUP.topMove = false;
+                    CDUP.downMove = true;
+                } else if (CDUP.position.y > compileObj.defaults.field.height - CDUP.height) {
+                    CDUP.position.y = compileObj.defaults.field.height - CDUP.height;
+                    CDUP.topMove = true;
+                    CDUP.downMove = false;
                 }
+                //compileObj.arrayCheckedElement.push(key);
+                for (var k in compileObj.defaults.unit) {
+                    if (compileObj.defaults.unit.hasOwnProperty(k) && compileObj.arrayCheckedElement.indexOf(k)==-1) {
+                        var CDUP2 = compileObj.defaults.unit[key].physicalCharact;
+
+                        if (CDUP.position.x+CDUP.width > CDUP2.position.x && CDUP.position.x<CDUP2.position.x &&
+                            (CDUP.position.y +CDUP.height>CDUP2.position.y && CDUP.position.y<CDUP2.position.y+CDUP2.height))
+                        {
+                            CDUP.position.x-=CDUP.position.x+CDUP.width-CDUP2.position.x;
+                            CDUP.leftMove = true;
+                            CDUP.rightMove = false;
+                            CDUP2.rightMove = true;
+                            CDUP2.leftMove = false;
+                        }
+                        else if(CDUP.position.x > CDUP2.position.x && CDUP.position.x<CDUP2.position.x+CDUP2.width &&
+                            (CDUP.position.y +CDUP.height>CDUP2.position.y && CDUP.position.y<CDUP2.position.y+CDUP2.height))
+                        {
+                            CDUP.position.x+=CDUP2.position.x+CDUP2+width-CDUP.position.x;
+                            CDUP.leftMove = false;
+                            CDUP.rightMove = true;
+                            CDUP2.rightMove = false;
+                            CDUP2.leftMove = true;
+                        }
+                        if(CDUP.position.y+CDUP.height>CDUP2.position.y && CDUP.position.y<CDUP2.position.y &&
+                            (CDUP.position.x+CDUP.width>CDUP2.position.x && CDUP.position.x<CDUP2.position.y+CDUP2.width ))
+                        {
+                            CDUP.position.y -= (CDUP.position.y+CDUP.height) - CDUP2.position.y;
+                            CDUP.topMove = true;
+                            CDUP.downMove = false;
+                            CDUP2.topMove = false;
+                            CDUP2.downMove = true;
+                        }
+                        else if(CDUP.position.y<CDUP2.position.y+CDUP2.height && CDUP.position.y<CDUP2.position.y &&
+                            (CDUP.position.x+CDUP.width>CDUP2.position.x && CDUP.position.x<CDUP2.position.y+CDUP2.width ))
+                        {
+                            CDUP.position.y += (CDUP2.position.y+CDUP2.height) - CDUP2.position.y;
+                            CDUP.topMove = false;
+                            CDUP.downMove = true;
+                            CDUP2.topMove = true;
+                            CDUP2.downMove = false;
+                        }
+
+                    }
+                }
+
+
             }
         }
     }
+    compileObj.arrayCheckedElement = [];
 };
 compileObj.random = function(wat){
   if(wat == "color"){
@@ -120,7 +170,7 @@ compileObj.random = function(wat){
       }
   }
   if(wat == "step"){
-      return Math.floor(Math.random()*(5-1)+1);
+      return Math.floor(Math.random()*(2-1)+1);
   }
 };
 
@@ -128,8 +178,8 @@ compileObj.generatorEnemy = function () {
     compileObj.defaults.unit['enemy' + new Date().getTime()] = {
         "active": true,
         "physicalCharact": {
-            "width": 25,
-            "height": 15,
+            "width": 65,
+            "height": 65,
             "weight": 1,
             "texture": compileObj.random("color"),
             "position": compileObj.random("enemyPosition"),
@@ -197,7 +247,7 @@ compileObj.runOnce = function(){
         if (compileObj.defaults.constructor == Object) {
             compileObj.generatorEnemy();
             console.log('enemy');
-            if(count>40) {
+            if(count>4) {
                 clearInterval(interval);
             }
             count++;
