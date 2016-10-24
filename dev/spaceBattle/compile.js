@@ -103,45 +103,50 @@ compileObj.collision = function () {
                 }
                 //compileObj.arrayCheckedElement.push(key);
                 for (var k in compileObj.defaults.unit) {
-                    if (compileObj.defaults.unit.hasOwnProperty(k) && compileObj.arrayCheckedElement.indexOf(k)==-1) {
-                        var CDUP2 = compileObj.defaults.unit[key].physicalCharact;
+                    if (compileObj.defaults.unit.hasOwnProperty(k) &&compileObj.defaults.unit[k].active/* && compileObj.arrayCheckedElement.indexOf(k)==-1*/) {
+                        var CDUP2 = compileObj.defaults.unit[k].physicalCharact;
+                        //if(k!="mainHero") {
+                            if (CDUP.position.x + CDUP.width > CDUP2.position.x && CDUP.position.x < CDUP2.position.x &&
+                                (CDUP.position.y + CDUP.height > CDUP2.position.y && CDUP.position.y < CDUP2.position.y+CDUP2.height) &&
+                                (CDUP2.position.x-CDUP.position.x>CDUP.position.y-CDUP2.position.y && CDUP2.position.x-CDUP.position.x>CDUP2.position.y-CDUP.position.y )) {
 
-                        if (CDUP.position.x+CDUP.width > CDUP2.position.x && CDUP.position.x<CDUP2.position.x &&
-                            (CDUP.position.y +CDUP.height>CDUP2.position.y && CDUP.position.y<CDUP2.position.y+CDUP2.height))
-                        {
-                            CDUP.position.x-=CDUP.position.x+CDUP.width-CDUP2.position.x;
-                            CDUP.leftMove = true;
-                            CDUP.rightMove = false;
-                            CDUP2.rightMove = true;
-                            CDUP2.leftMove = false;
-                        }
-                        else if(CDUP.position.x > CDUP2.position.x && CDUP.position.x<CDUP2.position.x+CDUP2.width &&
-                            (CDUP.position.y +CDUP.height>CDUP2.position.y && CDUP.position.y<CDUP2.position.y+CDUP2.height))
-                        {
-                            CDUP.position.x+=CDUP2.position.x+CDUP2+width-CDUP.position.x;
-                            CDUP.leftMove = false;
-                            CDUP.rightMove = true;
-                            CDUP2.rightMove = false;
-                            CDUP2.leftMove = true;
-                        }
-                        if(CDUP.position.y+CDUP.height>CDUP2.position.y && CDUP.position.y<CDUP2.position.y &&
-                            (CDUP.position.x+CDUP.width>CDUP2.position.x && CDUP.position.x<CDUP2.position.y+CDUP2.width ))
-                        {
-                            CDUP.position.y -= (CDUP.position.y+CDUP.height) - CDUP2.position.y;
-                            CDUP.topMove = true;
-                            CDUP.downMove = false;
-                            CDUP2.topMove = false;
-                            CDUP2.downMove = true;
-                        }
-                        else if(CDUP.position.y<CDUP2.position.y+CDUP2.height && CDUP.position.y<CDUP2.position.y &&
-                            (CDUP.position.x+CDUP.width>CDUP2.position.x && CDUP.position.x<CDUP2.position.y+CDUP2.width ))
-                        {
-                            CDUP.position.y += (CDUP2.position.y+CDUP2.height) - CDUP2.position.y;
-                            CDUP.topMove = false;
-                            CDUP.downMove = true;
-                            CDUP2.topMove = true;
-                            CDUP2.downMove = false;
-                        }
+                                CDUP.position.x -= (CDUP.position.x + CDUP.width) - CDUP2.position.x;
+                                CDUP.leftMove = true;
+                                CDUP.rightMove = false;
+                                k!="mainHero"?CDUP2.rightMove = true:null;
+                                k!="mainHero"?CDUP2.leftMove = false:null;
+                            }
+                            else if (CDUP.position.x > CDUP2.position.x && CDUP.position.x < CDUP2.position.x + CDUP2.width &&
+                                (CDUP.position.y + CDUP.height > CDUP2.position.y && CDUP.position.y < CDUP2.position.y+CDUP2.height)&&
+                                (CDUP.position.x-CDUP2.position.x>CDUP.position.y-CDUP2.position.y && CDUP.position.x-CDUP2.position.x>CDUP2.position.y-CDUP.position.y )) {
+
+                                CDUP.position.x += (CDUP2.position.x + CDUP2.width) - CDUP.position.x;
+                                CDUP.leftMove = false;
+                                CDUP.rightMove = true;
+                                k!="mainHero"?CDUP2.rightMove = false:null;
+                                k!="mainHero"?CDUP2.leftMove = true:null;
+                            }
+                            if (CDUP.position.y + CDUP.height > CDUP2.position.y && CDUP.position.y < CDUP2.position.y &&
+                                (CDUP.position.x + CDUP.width > CDUP2.position.x && CDUP.position.x < CDUP2.position.x+CDUP2.width)&&
+                                (CDUP2.position.y-CDUP.position.y>CDUP.position.x-CDUP2.position.x&&CDUP2.position.y-CDUP.position.y>CDUP2.position.x-CDUP.position.x)) {
+
+                                CDUP.position.y -= (CDUP.position.y + CDUP.height) - CDUP2.position.y;
+                                CDUP.topMove = true;
+                                CDUP.downMove = false;
+                                k!="mainHero"?CDUP2.topMove = false:null;
+                                k!="mainHero"?CDUP2.downMove = true:null;
+                            }
+                            else if (CDUP.position.y < CDUP2.position.y + CDUP2.height && CDUP.position.y+CDUP.height > CDUP2.position.y+CDUP2.height &&
+                                (CDUP.position.x + CDUP.width > CDUP2.position.x && CDUP.position.x < CDUP2.position.x+CDUP2.width)&&
+                                (CDUP.position.y-CDUP2.position.y>CDUP.position.x-CDUP2.position.x&&CDUP.position.y-CDUP2.position.y>CDUP2.position.x-CDUP.position.x)) {
+
+                                CDUP.position.y += (CDUP2.position.y + CDUP2.height) - CDUP.position.y;
+                                CDUP.topMove = false;
+                                CDUP.downMove = true;
+                                k!="mainHero"?CDUP2.topMove = true:null;
+                                k!="mainHero"?CDUP2.downMove = false:null;
+                            }
+                        //}
 
                     }
                 }
@@ -170,7 +175,7 @@ compileObj.random = function(wat){
       }
   }
   if(wat == "step"){
-      return Math.floor(Math.random()*(2-1)+1);
+      return Math.floor(Math.random()*(4-1)+1);
   }
 };
 
@@ -178,8 +183,8 @@ compileObj.generatorEnemy = function () {
     compileObj.defaults.unit['enemy' + new Date().getTime()] = {
         "active": true,
         "physicalCharact": {
-            "width": 65,
-            "height": 65,
+            "width": 25,
+            "height": 25,
             "weight": 1,
             "texture": compileObj.random("color"),
             "position": compileObj.random("enemyPosition"),
@@ -247,7 +252,7 @@ compileObj.runOnce = function(){
         if (compileObj.defaults.constructor == Object) {
             compileObj.generatorEnemy();
             console.log('enemy');
-            if(count>4) {
+            if(count>25) {
                 clearInterval(interval);
             }
             count++;
