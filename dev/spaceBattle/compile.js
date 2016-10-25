@@ -68,6 +68,10 @@ compileObj.draw = function () {
 };
 
 compileObj.collision = function () {
+    var xDif = 0;
+    var yDif = 0;
+    var bH = 0;
+    var bW = 0;
     for (var key in compileObj.defaults.unit) {
         if (compileObj.defaults.unit.hasOwnProperty(key) && compileObj.defaults.unit[key].active) {
             var CDUP = compileObj.defaults.unit[key].physicalCharact;
@@ -101,57 +105,36 @@ compileObj.collision = function () {
                     CDUP.topMove = true;
                     CDUP.downMove = false;
                 }
-                //compileObj.arrayCheckedElement.push(key);
+                compileObj.arrayCheckedElement.push(key);
                 for (var k in compileObj.defaults.unit) {
-                    if (compileObj.defaults.unit.hasOwnProperty(k) &&compileObj.defaults.unit[k].active/* && compileObj.arrayCheckedElement.indexOf(k)==-1*/) {
+                    if (compileObj.defaults.unit.hasOwnProperty(k) && compileObj.defaults.unit[k].active && k!=key/* && compileObj.arrayCheckedElement.indexOf(k)==-1*/) {
                         var CDUP2 = compileObj.defaults.unit[k].physicalCharact;
-                        //if(k!="mainHero") {
-                            if (CDUP.position.x + CDUP.width > CDUP2.position.x && CDUP.position.x < CDUP2.position.x &&
-                                (CDUP.position.y + CDUP.height > CDUP2.position.y && CDUP.position.y < CDUP2.position.y+CDUP2.height) &&
-                                (CDUP2.position.x-CDUP.position.x>CDUP.position.y-CDUP2.position.y && CDUP2.position.x-CDUP.position.x>CDUP2.position.y-CDUP.position.y )) {
 
-                                CDUP.position.x -= (CDUP.position.x + CDUP.width) - CDUP2.position.x;
-                                CDUP.leftMove = true;
-                                CDUP.rightMove = false;
-                                k!="mainHero"?CDUP2.rightMove = true:null;
-                                k!="mainHero"?CDUP2.leftMove = false:null;
+                        bW = CDUP2.position.x-CDUP.position.x>0?CDUP.width:CDUP2.width;
+                        bH = CDUP2.position.y-CDUP.position.y>0?CDUP.height:CDUP2.height;
+                        xDif = Math.abs(CDUP2.position.x-CDUP.position.x)-bW;
+                        yDif = Math.abs(CDUP2.position.y-CDUP.position.y)-bH;
+
+                        if(xDif<0 && yDif<0) {
+                            xDif *= -1;
+                            yDif *= -1;
+                            if (xDif < yDif) { // collision x coordinate
+                                CDUP2.position.x + xDif - CDUP.position.x >= bW ? CDUP.position.x -= xDif : CDUP.position.x += xDif;
+                                if(k!="mainHero")CDUP2.leftMove ? CDUP2.leftMove = false : CDUP2.leftMove = true;
+                                if(k!="mainHero")CDUP2.rightMove ? CDUP2.rightMove = false : CDUP2.rightMove = true;
+                                CDUP.leftMove ? CDUP.leftMove = false : CDUP.leftMove = true;
+                                CDUP.rightMove ? CDUP.rightMove = false : CDUP.rightMove = true;
                             }
-                            else if (CDUP.position.x > CDUP2.position.x && CDUP.position.x < CDUP2.position.x + CDUP2.width &&
-                                (CDUP.position.y + CDUP.height > CDUP2.position.y && CDUP.position.y < CDUP2.position.y+CDUP2.height)&&
-                                (CDUP.position.x-CDUP2.position.x>CDUP.position.y-CDUP2.position.y && CDUP.position.x-CDUP2.position.x>CDUP2.position.y-CDUP.position.y )) {
-
-                                CDUP.position.x += (CDUP2.position.x + CDUP2.width) - CDUP.position.x;
-                                CDUP.leftMove = false;
-                                CDUP.rightMove = true;
-                                k!="mainHero"?CDUP2.rightMove = false:null;
-                                k!="mainHero"?CDUP2.leftMove = true:null;
+                            else if (xDif >= yDif) {
+                                CDUP2.position.y + yDif - CDUP.position.y >= bH ? CDUP.position.y -= yDif : CDUP.position.y += yDif;
+                                if(k!="mainHero")CDUP2.topMove ? CDUP2.topMove = false : CDUP2.topMove = true;
+                                if(k!="mainHero")CDUP2.downMove ? CDUP2.downMove = false : CDUP2.downMove = true;
+                                CDUP.topMove ? CDUP.topMove = false : CDUP.topMove = true;
+                                CDUP.downMove ? CDUP.downMove = false : CDUP.downMove = true;
                             }
-                            if (CDUP.position.y + CDUP.height > CDUP2.position.y && CDUP.position.y < CDUP2.position.y &&
-                                (CDUP.position.x + CDUP.width > CDUP2.position.x && CDUP.position.x < CDUP2.position.x+CDUP2.width)&&
-                                (CDUP2.position.y-CDUP.position.y>CDUP.position.x-CDUP2.position.x&&CDUP2.position.y-CDUP.position.y>CDUP2.position.x-CDUP.position.x)) {
-
-                                CDUP.position.y -= (CDUP.position.y + CDUP.height) - CDUP2.position.y;
-                                CDUP.topMove = true;
-                                CDUP.downMove = false;
-                                k!="mainHero"?CDUP2.topMove = false:null;
-                                k!="mainHero"?CDUP2.downMove = true:null;
-                            }
-                            else if (CDUP.position.y < CDUP2.position.y + CDUP2.height && CDUP.position.y+CDUP.height > CDUP2.position.y+CDUP2.height &&
-                                (CDUP.position.x + CDUP.width > CDUP2.position.x && CDUP.position.x < CDUP2.position.x+CDUP2.width)&&
-                                (CDUP.position.y-CDUP2.position.y>CDUP.position.x-CDUP2.position.x&&CDUP.position.y-CDUP2.position.y>CDUP2.position.x-CDUP.position.x)) {
-
-                                CDUP.position.y += (CDUP2.position.y + CDUP2.height) - CDUP.position.y;
-                                CDUP.topMove = false;
-                                CDUP.downMove = true;
-                                k!="mainHero"?CDUP2.topMove = true:null;
-                                k!="mainHero"?CDUP2.downMove = false:null;
-                            }
-                        //}
-
+                        }
                     }
                 }
-
-
             }
         }
     }
@@ -175,7 +158,10 @@ compileObj.random = function(wat){
       }
   }
   if(wat == "step"){
-      return Math.floor(Math.random()*(4-1)+1);
+      return Math.floor(Math.random()*(3-1)+1);
+  }
+  if(wat == "size"){
+      return Math.floor(Math.random()*(30-15)+15);
   }
 };
 
@@ -183,8 +169,8 @@ compileObj.generatorEnemy = function () {
     compileObj.defaults.unit['enemy' + new Date().getTime()] = {
         "active": true,
         "physicalCharact": {
-            "width": 25,
-            "height": 25,
+            "width": compileObj.random("size"),
+            "height": compileObj.random("size"),
             "weight": 1,
             "texture": compileObj.random("color"),
             "position": compileObj.random("enemyPosition"),
@@ -252,7 +238,7 @@ compileObj.runOnce = function(){
         if (compileObj.defaults.constructor == Object) {
             compileObj.generatorEnemy();
             console.log('enemy');
-            if(count>25) {
+            if(count>400) {
                 clearInterval(interval);
             }
             count++;
