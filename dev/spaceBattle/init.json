@@ -21,10 +21,10 @@
         },
         "stepx":6,
         "stepy":6,
-        "leftMove": false,
-        "rightMove": false,
-        "topMove": false,
-        "downMove": false,
+        "leftMove": -1,
+        "rightMove": -1,
+        "topMove": -1,
+        "downMove": -1,
         "fire": false
       },
       "level": {
@@ -64,10 +64,10 @@
         },
         "stepx":6 ,
         "stepy":6,
-        "leftMove": false,
-        "rightMove": false,
-        "topMove": false,
-        "downMove": false,
+        "leftMove": -1,
+        "rightMove": -1,
+        "topMove": -1,
+        "downMove": -1,
         "fire": false
       },
       "level": {

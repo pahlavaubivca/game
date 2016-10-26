@@ -6,10 +6,10 @@ var compileObj = {};
 /**
  *
 * */
-compileObj.field = function () {
+compileObj.initField = function () {
     if(!compileObj.canvas){compileObj.canvas = document.getElementById("canvas");}
-    compileObj.canvas.width = compileObj.defaults.field.width;/*window.innerWidth;*/
-    compileObj.canvas.height = compileObj.defaults.field.height;
+    compileObj.canvas.width = compileObj.field.width;/*window.innerWidth;*/
+    compileObj.canvas.height = compileObj.field.height;
     compileObj.canvas.style.backgroundColor = 'rgba(0,0,0,0.5)';
 };
 
@@ -17,12 +17,13 @@ compileObj.field = function () {
  * det json with defaults value, and convert to object
  * @constructor
 * */
-compileObj.defaults = function (resp) {
+compileObj.defaults = function (resp,callback) {
+    callback? this.callback = callback : null;
     if(resp){
-        compileObj.defaults = JSON.parse(resp);
-        compileObj.compileDefauls(compileObj.defaults);
+        compileObj.compileDefauls(compileObj,JSON.parse(resp));
         compileObj.registerAction();
-        compileObj.field();
+        compileObj.initField();
+        this.callback();
     } else {
         var xhr = new XMLHttpRequest();
         xhr.open("GET", "init.json");
@@ -35,29 +36,32 @@ compileObj.defaults = function (resp) {
     }
 };
 
-compileObj.compileDefauls = function(obj){
+compileObj.compileDefauls = function (parentObj, obj) {
     var obj = obj || {};
-    for(var key in obj){
-        if(obj.hasOwnProperty(key)){
-            if(obj[key].constructor == String) {
-                if(obj[key].match(/(&&&)/)){
-                    obj[key] = obj[key].replace(/&&&/,'');
+    for (var key in obj) {
+        if (obj.hasOwnProperty(key)) {
+
+            if (obj[key].constructor == String) {
+                if (obj[key].match(/(&&&)/)) {
+                    obj[key] = obj[key].replace(/&&&/, '');
                 } else {
                     obj[key] = new Function("return " + obj[key] + "")();
                 }
-            } else if(obj[key].constructor==Object){
-                compileObj.compileDefauls(obj[key]);
+                parentObj[key] = obj[key];
+            } else if (obj[key].constructor == Object) {
+                parentObj[key] = {};
+                compileObj.compileDefauls(parentObj[key], obj[key]);
+            } else {
+                parentObj[key] = obj[key];
             }
         }
     }
-    compileObj.arrayCheckedElement = [];
-
 };
 
 
 compileObj.draw = function () {
     var ship = compileObj.canvas.getContext("2d");
-    var unitParam = compileObj.defaults.unit;
+    var unitParam = compileObj.unit;
     for (var key in unitParam) {
         if (unitParam.hasOwnProperty(key) && unitParam[key].active) {
             ship.fillStyle = unitParam[key].physicalCharact.texture;
@@ -72,43 +76,32 @@ compileObj.collision = function () {
     var yDif = 0;
     var bH = 0;
     var bW = 0;
-    for (var key in compileObj.defaults.unit) {
-        if (compileObj.defaults.unit.hasOwnProperty(key) && compileObj.defaults.unit[key].active) {
-            var CDUP = compileObj.defaults.unit[key].physicalCharact;
+    for (var key in compileObj.unit) {
+        if (compileObj.unit.hasOwnProperty(key) && compileObj.unit[key].active) {
+            var CDUP = compileObj.unit[key].physicalCharact;
             if (key == "mainHero") {
-                if (CDUP.position.x < 0) {
-                    CDUP.position.x = 0;
-                } else if (CDUP.position.x > compileObj.defaults.field.width - CDUP.width) {
-                    CDUP.position.x = compileObj.defaults.field.width - CDUP.width;
+                if(CDUP.position.x<0 || CDUP.position.x>compileObj.field.width - CDUP.width){
+                    CDUP.position.x = CDUP.position.x<0?CDUP.position.x=0:CDUP.position.x=compileObj.field.width - CDUP.width;
                 }
-                if (CDUP.position.y < 0) {
-                    CDUP.position.y = 0;
-                } else if (CDUP.position.y > compileObj.defaults.field.height - CDUP.height) {
-                    CDUP.position.y = compileObj.defaults.field.height - CDUP.height;
+                if(CDUP.position.y<0 || CDUP.position.y>compileObj.field.height - CDUP.height){
+                    CDUP.position.y = CDUP.position.y<0?CDUP.position.y=0:CDUP.position.y=compileObj.field.height - CDUP.height;
                 }
+
             } else {
-                if (CDUP.position.x < 0) {
-                    CDUP.position.x = 0;
-                    CDUP.leftMove = false;
-                    CDUP.rightMove = true;
-                } else if (CDUP.position.x > compileObj.defaults.field.width - CDUP.width) {
-                    CDUP.position.x = compileObj.defaults.field.width - CDUP.width;
-                    CDUP.leftMove = true;
-                    CDUP.rightMove = false;
+                if(CDUP.position.x<0 || CDUP.position.x>compileObj.field.width - CDUP.width){
+                    CDUP.position.x = CDUP.position.x<0?CDUP.position.x=0:CDUP.position.x=compileObj.field.width - CDUP.width;
+                    CDUP.leftMove *= -1;
+                    CDUP.rightMove *= -1;
                 }
-                if (CDUP.position.y < 0) {
-                    CDUP.position.y = 0;
-                    CDUP.topMove = false;
-                    CDUP.downMove = true;
-                } else if (CDUP.position.y > compileObj.defaults.field.height - CDUP.height) {
-                    CDUP.position.y = compileObj.defaults.field.height - CDUP.height;
-                    CDUP.topMove = true;
-                    CDUP.downMove = false;
+                if(CDUP.position.y<0 || CDUP.position.y>compileObj.field.height - CDUP.height){
+                    CDUP.position.y = CDUP.position.y<0?CDUP.position.y=0:CDUP.position.y=compileObj.field.height - CDUP.height;
+                    CDUP.topMove *= -1;
+                    CDUP.downMove *= -1;
                 }
-                compileObj.arrayCheckedElement.push(key);
-                for (var k in compileObj.defaults.unit) {
-                    if (compileObj.defaults.unit.hasOwnProperty(k) && compileObj.defaults.unit[k].active && k!=key/* && compileObj.arrayCheckedElement.indexOf(k)==-1*/) {
-                        var CDUP2 = compileObj.defaults.unit[k].physicalCharact;
+
+                for (var k in compileObj.unit) {
+                    if (compileObj.unit.hasOwnProperty(k) && compileObj.unit[k].active && k!=key) {
+                        var CDUP2 = compileObj.unit[k].physicalCharact;
 
                         bW = CDUP2.position.x-CDUP.position.x>0?CDUP.width:CDUP2.width;
                         bH = CDUP2.position.y-CDUP.position.y>0?CDUP.height:CDUP2.height;
@@ -120,17 +113,17 @@ compileObj.collision = function () {
                             yDif *= -1;
                             if (xDif < yDif) { // collision x coordinate
                                 CDUP2.position.x + xDif - CDUP.position.x >= bW ? CDUP.position.x -= xDif : CDUP.position.x += xDif;
-                                if(k!="mainHero")CDUP2.leftMove ? CDUP2.leftMove = false : CDUP2.leftMove = true;
-                                if(k!="mainHero")CDUP2.rightMove ? CDUP2.rightMove = false : CDUP2.rightMove = true;
-                                CDUP.leftMove ? CDUP.leftMove = false : CDUP.leftMove = true;
-                                CDUP.rightMove ? CDUP.rightMove = false : CDUP.rightMove = true;
+                                if(k!="mainHero")CDUP2.leftMove*=-1;
+                                if(k!="mainHero")CDUP2.rightMove*=-1;
+                                CDUP.leftMove *=-1;
+                                CDUP.rightMove*=-1;
                             }
                             else if (xDif >= yDif) {
                                 CDUP2.position.y + yDif - CDUP.position.y >= bH ? CDUP.position.y -= yDif : CDUP.position.y += yDif;
-                                if(k!="mainHero")CDUP2.topMove ? CDUP2.topMove = false : CDUP2.topMove = true;
-                                if(k!="mainHero")CDUP2.downMove ? CDUP2.downMove = false : CDUP2.downMove = true;
-                                CDUP.topMove ? CDUP.topMove = false : CDUP.topMove = true;
-                                CDUP.downMove ? CDUP.downMove = false : CDUP.downMove = true;
+                                if(k!="mainHero")CDUP2.topMove *=-1;
+                                if(k!="mainHero")CDUP2.downMove *=-1;
+                                CDUP.topMove *=-1;
+                                CDUP.downMove *=-1;
                             }
                         }
                     }
@@ -138,7 +131,6 @@ compileObj.collision = function () {
             }
         }
     }
-    compileObj.arrayCheckedElement = [];
 };
 compileObj.random = function(wat){
   if(wat == "color"){
@@ -150,10 +142,10 @@ compileObj.random = function(wat){
   if(wat == "enemyPosition"){
       return {
           "x": (function () {
-              return Math.random() * ((compileObj.defaults.field.width - 100) - 0) + 0;//remove 100 its hardcode
+              return Math.random() * ((compileObj.field.width - 100) - 0) + 0;//remove 100 its hardcode
           })(),
           "y": (function () {
-              return Math.random() * ((compileObj.defaults.field.height / 2) - 0) + 0;
+              return Math.random() * ((compileObj.field.height / 2) - 0) + 0;
           })()
       }
   }
@@ -166,7 +158,7 @@ compileObj.random = function(wat){
 };
 
 compileObj.generatorEnemy = function () {
-    compileObj.defaults.unit['enemy' + new Date().getTime()] = {
+    compileObj.unit['enemy' + new Date().getTime()] = {
         "active": true,
         "physicalCharact": {
             "width": compileObj.random("size"),
@@ -176,10 +168,10 @@ compileObj.generatorEnemy = function () {
             "position": compileObj.random("enemyPosition"),
             "stepx": compileObj.random("step"),
             "stepy":compileObj.random("step"),
-            "leftMove": false,
-            "rightMove": true,
-            "topMove": false,
-            "downMove": true,
+            "leftMove": -1,
+            "rightMove": 1,
+            "topMove": -1,
+            "downMove": 1,
             "fire": false
         },
         "level": {}
@@ -191,23 +183,21 @@ compileObj.generatorEnemy = function () {
  * @constructor
 * */
 compileObj.registerAction = function () {
-    var action = compileObj.defaults.unit.mainHero.physicalCharact;
+    var action = compileObj.unit.mainHero.physicalCharact;
     window.addEventListener('keydown', function (event) {
-
-        event.keyCode == 65 ? action.leftMove = true : action.leftMove;
-        event.keyCode == 68 ? action.rightMove = true : action.rightMove;
-        event.keyCode == 87 ? action.topMove = true : action.topMove;
-        event.keyCode == 83 ? action.downMove = true : action.downMove;
+        event.keyCode == 65 ? action.leftMove = 1 : action.leftMove;
+        event.keyCode == 68 ? action.rightMove = 1 : action.rightMove;
+        event.keyCode == 87 ? action.topMove = 1 : action.topMove;
+        event.keyCode == 83 ? action.downMove = 1 : action.downMove;
     });
     window.addEventListener("click", function () {
         action.fire = true;
     });
     window.addEventListener('keyup', function (event) {
-
-        event.keyCode == 65 ? action.leftMove = false : action.leftMove;
-        event.keyCode == 68 ? action.rightMove = false : action.rightMove;
-        event.keyCode == 87 ? action.topMove = false : action.topMove;
-        event.keyCode == 83 ? action.downMove = false : action.downMove;
+        event.keyCode == 65 ? action.leftMove = -1 : action.leftMove;
+        event.keyCode == 68 ? action.rightMove = -1 : action.rightMove;
+        event.keyCode == 87 ? action.topMove = -1 : action.topMove;
+        event.keyCode == 83 ? action.downMove = -1 : action.downMove;
     })
 };
 
@@ -216,13 +206,13 @@ compileObj.registerAction = function () {
  * @constructor
 * */
 compileObj.move = function () {
-    if(!compileObj.du) compileObj.du = compileObj.defaults.unit;
+    if(!compileObj.du) compileObj.du = compileObj.unit;
     for(var key in compileObj.du){
         if(compileObj.du.hasOwnProperty(key) && compileObj.du[key].active){
-            compileObj.du[key]['physicalCharact']['leftMove'] == true ? compileObj.du[key]['physicalCharact'].position.x -= compileObj.du[key]['physicalCharact'].stepx : 0;
-            compileObj.du[key]['physicalCharact']['rightMove'] == true ? compileObj.du[key]['physicalCharact'].position.x += compileObj.du[key]['physicalCharact'].stepx : 0;
-            compileObj.du[key]['physicalCharact']['topMove'] == true ? compileObj.du[key]['physicalCharact'].position.y -= compileObj.du[key]['physicalCharact'].stepy : 0;
-            compileObj.du[key]['physicalCharact']['downMove'] == true ? compileObj.du[key]['physicalCharact'].position.y += compileObj.du[key]['physicalCharact'].stepy : 0;
+            compileObj.du[key]['physicalCharact']['leftMove'] == 1 ? compileObj.du[key]['physicalCharact'].position.x -= compileObj.du[key]['physicalCharact'].stepx : 0;
+            compileObj.du[key]['physicalCharact']['rightMove'] == 1 ? compileObj.du[key]['physicalCharact'].position.x += compileObj.du[key]['physicalCharact'].stepx : 0;
+            compileObj.du[key]['physicalCharact']['topMove'] == 1 ? compileObj.du[key]['physicalCharact'].position.y -= compileObj.du[key]['physicalCharact'].stepy : 0;
+            compileObj.du[key]['physicalCharact']['downMove'] == 1 ? compileObj.du[key]['physicalCharact'].position.y += compileObj.du[key]['physicalCharact'].stepy : 0;
         }
     }
 };
@@ -232,26 +222,27 @@ compileObj.move = function () {
  * @constructor
 * */
 compileObj.runOnce = function(){
-    compileObj.defaults();
-    var count=1;
-    var interval = setInterval((function () {
-        if (compileObj.defaults.constructor == Object) {
-            compileObj.generatorEnemy();
-            console.log('enemy');
-            if(count>400) {
-                clearInterval(interval);
+    function callback() {
+        var count = 1;
+        var interval = setInterval((function () {
+            if (compileObj.constructor == Object) {
+                compileObj.generatorEnemy();
+                console.log('enemy');
+                if (count > 40) {
+                    clearInterval(interval);
+                }
+                count++;
             }
-            count++;
-        }
-    }), 10)
-
+        }), 10)
+    }
+    compileObj.defaults(undefined,callback);
 };
 compileObj.runOnce();
 
 
 compileObj.finish = function () {
     if(compileObj.canvas) {
-        compileObj.field();
+        compileObj.initField();
         compileObj.move();
         compileObj.collision();
         compileObj.draw();
