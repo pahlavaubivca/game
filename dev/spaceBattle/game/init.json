@@ -10,6 +10,7 @@
   "unit": {
     "enemy": {
       "active":false,
+      "checked":false,
       "physicalCharact": {
         "width": 25,
         "height": 15,
