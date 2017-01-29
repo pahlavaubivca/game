@@ -4,5 +4,7 @@
 var http = require('http');
 var handler = require('./handler/app');
 
-var server =  http.createServer(function(req){res}).listen(666);
+var server = http.createServer(function(req,res){
+    handler.simple(req,res)
+}).listen(666,'localhost');
 
