@@ -26,12 +26,18 @@ module.exports = (function(){
         var urlComponent = smallUrlParser.exec(req.url)|| 'NO';
         if(urlComponent.length>3)urlComponent = urlComponent[3];
         res.end(urlComponent);
+
+        urlComponent.split('&').forEach(function(e, i, a) {
+            urlComponent = a;
+            a[i] = e.split('=');
+        });
+
         client.query('INSERT INTO speedstats (date,fps,encounter_time,jsonobj)' +
             ' VALUES (current_date,1,1,$1)', [urlComponent], function(err, result) {
             if(err) {
                 return console.error('error running query', err);
             }
-            console.log(result.rows[0]);
+            console.log(result);
             //output: 1
         });
         fs.writeFile("./tmp/test", "Hey there!", function(err) {
