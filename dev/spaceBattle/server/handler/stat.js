@@ -15,53 +15,45 @@ module.exports = (function () {
         console.log(req.url);
         var urlComponent = {};
 
-        try {
-            if (smallUrlParser.exec(req.url)) {
-                for (var i = 0, arr = smallUrlParser.exec(req.url); i < arr.length; i++) {
-                    switch (i) {
-                        case 1:
-                            urlComponent['path'] = arr[i];
-                            break;
-                        case 2:
-                            urlComponent['fileName'] = arr[i];
-                            break;
-                        case 3:
-                            urlComponent['param'] = arr[i];
-                            break;
-                    }
+        if (smallUrlParser.exec(req.url)) {
+            for (var i = 0, arr = smallUrlParser.exec(req.url); i < arr.length; i++) {
+                switch (i) {
+                    case 1:
+                        urlComponent['path'] = arr[i];
+                        break;
+                    case 2:
+                        urlComponent['fileName'] = arr[i];
+                        break;
+                    case 3:
+                        urlComponent['param'] = arr[i];
+                        break;
                 }
             }
-        } catch (e) {
-            console.log(e);
         }
 
-        if(urlComponent.param){
+        if (urlComponent.param) {
             try {
                 urlComponent.param = JSON.parse(decodeURIComponent(urlComponent.param));
-            } catch (e){
+            } catch (e) {
                 console.log(e);
             }
         }
 
-            /*urlComponent.split('&').forEach(function (e, i, a) {
-                urlComponent = a;
-                a[i] = e.split('=');
-            });*/
-
-
-        client.query('INSERT INTO speedstats (date,fps,encounter_time,jsonobj)' +
-            ' VALUES (current_date,1,1,$1)', [urlComponent], function (err, result) {
-            if (err) {
-                return console.error('error running query', err);
-            }
-        });
+        if(urlComponent.param) {
+            client.query('INSERT INTO speedstats (date,fps,encounter_time,jsonobj)' +
+                ' VALUES (current_date,1,1,$1)', [urlComponent], function (err, result) {
+                if (err) {
+                    return console.error('error running query', err);
+                }
+            });
+        }
 
         /*fs.writeFile("./tmp/test", "Hey there!", function (err) {
-            if (err) {
-                return console.log(err);
-            }
-            console.log("The file was saved!");
-        });*/
+         if (err) {
+         return console.log(err);
+         }
+         console.log("The file was saved!");
+         });*/
 
         res.end(JSON.stringify(urlComponent));
     };

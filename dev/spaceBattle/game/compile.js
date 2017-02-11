@@ -5,10 +5,13 @@ var compileObj = {};
 
 /**
  *
-* */
+ * */
 compileObj.initField = function () {
-    if(!compileObj.canvas){compileObj.canvas = document.getElementById("canvas");}
-    compileObj.canvas.width = compileObj.field.width;/*window.innerWidth;*/
+    if (!compileObj.canvas) {
+        compileObj.canvas = document.getElementById("canvas");
+    }
+    compileObj.canvas.width = compileObj.field.width;
+    /*window.innerWidth;*/
     compileObj.canvas.height = compileObj.field.height;
     compileObj.canvas.style.backgroundColor = 'rgba(0,0,0,0.5)';
 };
@@ -16,9 +19,9 @@ compileObj.initField = function () {
 /**
  * det json with defaults value, and convert to object
  * @constructor
-* */
-compileObj.defaults = function (resp,callback) {
-    callback? this.callback = callback : null;
+ * */
+compileObj.defaults = function (resp, callback) {
+    callback ? this.callback = callback : null;
     if (resp) {
         compileObj.compileDefauls(compileObj, JSON.parse(resp));
         compileObj.registerAction();
@@ -61,8 +64,8 @@ compileObj.compileDefauls = function (parentObj, obj) {
 compileObj.draw = function () {
     drawTime = performance.now();
     var ship = compileObj.canvas.getContext("2d");
-    for(var key in compileObj.unit) {
-        if(compileObj.unit.hasOwnProperty(key) && compileObj.unit[key].active) {
+    for (var key in compileObj.unit) {
+        if (compileObj.unit.hasOwnProperty(key) && compileObj.unit[key].active) {
             ship.fillStyle = compileObj.unit[key].physicalCharact.texture;
             ship.fillRect(compileObj.unit[key].physicalCharact.position.x, compileObj.unit[key].physicalCharact.position.y, compileObj.unit[key].physicalCharact.width, compileObj.unit[key].physicalCharact.height);
             ship.fill();
@@ -79,8 +82,8 @@ compileObj.collision = function (/*currentUnit, key*/) {
     var bH = 0;
     var bW = 0;
 
-    for(var key in compileObj.unit) {
-        if(compileObj.unit.hasOwnProperty(key) && compileObj.unit[key].active) {
+    for (var key in compileObj.unit) {
+        if (compileObj.unit.hasOwnProperty(key) && compileObj.unit[key].active) {
             var CDUP = compileObj.unit[key]['physicalCharact'];
 
             if (key == "mainHero") {
@@ -147,35 +150,38 @@ compileObj.collision = function (/*currentUnit, key*/) {
 
 };
 
-compileObj.random = function(wat){
-  if(wat == "color"){
-      var hex = [0,1,2,3,4,5,6,7,8,9,'a','b','c','d','f','e'];
-      var color = '#';
-      while(color.length<4){color+=hex[Math.floor(Math.random()*(hex.length-0)+0)]};
-      return color
-  }
-  if(wat == "enemyPosition"){
-      return {
-          "x": (function () {
-              return Math.random() * ((compileObj.field.width - 100) - 0) + 0;//remove 100 its hardcode
-          })(),
-          "y": (function () {
-              return Math.random() * ((compileObj.field.height / 2) - 0) + 0;
-          })()
-      }
-  }
-  if(wat == "step"){
-      return Math.floor(Math.random()*(3-1)+1);
-  }
-  if(wat == "size"){
-      return Math.floor(Math.random()*(30-15)+15);
-  }
+compileObj.random = function (wat) {
+    if (wat == "color") {
+        var hex = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 'a', 'b', 'c', 'd', 'f', 'e'];
+        var color = '#';
+        while (color.length < 4) {
+            color += hex[Math.floor(Math.random() * (hex.length - 0) + 0)]
+        }
+        ;
+        return color
+    }
+    if (wat == "enemyPosition") {
+        return {
+            "x": (function () {
+                return Math.random() * ((compileObj.field.width - 100) - 0) + 0;//remove 100 its hardcode
+            })(),
+            "y": (function () {
+                return Math.random() * ((compileObj.field.height / 2) - 0) + 0;
+            })()
+        }
+    }
+    if (wat == "step") {
+        return Math.floor(Math.random() * (3 - 1) + 1);
+    }
+    if (wat == "size") {
+        return Math.floor(Math.random() * (30 - 15) + 15);
+    }
 };
 
 compileObj.generatorEnemy = function () {
     compileObj.unit['enemy' + new Date().getTime()] = {
         "active": true,
-        "checked":false,
+        "checked": false,
         "physicalCharact": {
             "width": compileObj.random("size"),
             "height": compileObj.random("size"),
@@ -183,7 +189,7 @@ compileObj.generatorEnemy = function () {
             "texture": compileObj.random("color"),
             "position": compileObj.random("enemyPosition"),
             "stepx": compileObj.random("step"),
-            "stepy":compileObj.random("step"),
+            "stepy": compileObj.random("step"),
             "leftMove": -1,
             "rightMove": 1,
             "topMove": -1,
@@ -197,7 +203,7 @@ compileObj.generatorEnemy = function () {
 /**
  * register button action from player
  * @constructor
-* */
+ * */
 compileObj.registerAction = function () {
     var action = compileObj.unit.mainHero.physicalCharact;
     window.addEventListener('keydown', function (event) {
@@ -218,15 +224,15 @@ compileObj.registerAction = function () {
 };
 
 /**
-* determine move unit, if is active
+ * determine move unit, if is active
  * @constructor
-* */
+ * */
 
 
 compileObj.move = function () {
-    if(!compileObj.du) compileObj.du = compileObj.unit;
-    for(var key in compileObj.du){
-        if(compileObj.du.hasOwnProperty(key) && compileObj.du[key].active){
+    if (!compileObj.du) compileObj.du = compileObj.unit;
+    for (var key in compileObj.du) {
+        if (compileObj.du.hasOwnProperty(key) && compileObj.du[key].active) {
 
             if (compileObj.du[key]['physicalCharact']['leftMove'] == 1) {
                 compileObj.du[key]['physicalCharact'].position.x -= compileObj.du[key]['physicalCharact'].stepx;
@@ -247,8 +253,8 @@ compileObj.move = function () {
 /**
  * draw all elements : GG, enemys, nps, bullets
  * @constructor
-* */
-compileObj.runOnce = function(){
+ * */
+compileObj.runOnce = function () {
     function callback() {
 
         var interval = setInterval((function () {
@@ -263,14 +269,14 @@ compileObj.runOnce = function(){
             }
         }), 10)
     }
-    compileObj.defaults(undefined,callback);
+
+    compileObj.defaults(undefined, callback);
 };
 compileObj.runOnce();
 
 
-
 compileObj.finish = function () {
-    if(compileObj.canvas) {
+    if (compileObj.canvas) {
         fieldDr = performance.now();
         compileObj.initField();
         fieldDr = performance.now() - fieldDr;
@@ -279,35 +285,32 @@ compileObj.finish = function () {
 
         moveTime = performance.now();
         compileObj.move();
-        moveTime = performance.now()-moveTime;
+        moveTime = performance.now() - moveTime;
 
         compileObj.draw();
     }
-    window.requestAnimationFrame(function(event){
+    window.requestAnimationFrame(function (event) {
         compileObj.finish();
-        if(!lastCalledTime) {
+        if (!lastCalledTime) {
             lastCalledTime = Date.now();
             fps = 0;
             return;
         }
-        delta = (Date.now() - lastCalledTime)/1000;
+        delta = (Date.now() - lastCalledTime) / 1000;
         lastCalledTime = Date.now();
-        fps = 1/delta;
+        fps = 1 / delta;
 
     });
 };
 compileObj.finish();
 
 
-
-
-
 var count = 1;
 var drawTime = 0;
-var collisionTime  = 0;
+var collisionTime = 0;
 var moveTime = 0;
 var fieldDr = 0;
-var fps = 0,lastCalledTime=0;
+var fps = 0, lastCalledTime = 0;
 var divfps = document.getElementById('fps');
 var collTime = document.getElementById('collTime');
 var drTime = document.getElementById('drTime');
@@ -320,7 +323,7 @@ setInterval(function () {
     if (collisionTime != 0)   collTime.innerHTML = collisionTime;
     if (drawTime != 0) drTime.innerHTML = drawTime;
     if (moveTime != 0) moveT.innerHTML = moveTime;
-    if(fieldDr!=0)fieldD.innerHTML = fieldDr;
+    if (fieldDr != 0)fieldD.innerHTML = fieldDr;
 
     countI.innerHTML = count;
 }, 300);
