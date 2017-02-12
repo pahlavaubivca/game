@@ -9,18 +9,17 @@ canvas {
     position: fixed;
     left: 5px;
     top: 5px;
-    width: 28px;
+    width: 20px;
     height: 20px;
     overflow: hidden;
 }
 
 .side-stat-panel{
     position:fixed;
-    width:250px;
-    height:200px;
-    background: red;
+    background: rgba(255, 235, 0, 0.3);
     top:5px;
     left:55px;
+    padding:5px;
 }
 
 .count {
@@ -29,7 +28,6 @@ canvas {
     position: fixed;
     left: 5px;
     top: 35px;
-    width: 28px;
     height: 20px;
     overflow: hidden
 }
@@ -38,7 +36,13 @@ canvas {
 
 }
 .line.stat{
-    background: #a2a2af;
+    background: rgba(162, 162, 175, 0.5);
     width:124px;
     overflow: hidden;
+    float:left;
+    margin-right: 5px;
+}
+span{
+
+
 }
