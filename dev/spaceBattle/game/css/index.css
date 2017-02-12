@@ -1,0 +1,44 @@
+canvas {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+}
+
+.fps {
+    background: red;
+    position: fixed;
+    left: 5px;
+    top: 5px;
+    width: 28px;
+    height: 20px;
+    overflow: hidden;
+}
+
+.side-stat-panel{
+    position:fixed;
+    width:250px;
+    height:200px;
+    background: red;
+    top:5px;
+    left:55px;
+}
+
+.count {
+    background: black;
+    color: #fff;
+    position: fixed;
+    left: 5px;
+    top: 35px;
+    width: 28px;
+    height: 20px;
+    overflow: hidden
+}
+.line{
+    position: relative;
+
+}
+.line.stat{
+    background: #a2a2af;
+    width:124px;
+    overflow: hidden;
+}

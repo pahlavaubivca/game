@@ -262,7 +262,7 @@ compileObj.runOnce = function () {
 
                 compileObj.generatorEnemy();
                 console.log('enemy');
-                if (count > 50) {
+                if (count > 5) {
                     clearInterval(interval);
                 }
                 count++;

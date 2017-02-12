@@ -1,0 +1,67 @@
+html, body {
+    width: 100%;
+    height: 100%;
+    background: #fff9ce;
+    padding: 0px;
+    margin: 0px;
+}
+
+.container {
+    position: relative;
+    min-width: 800px;
+    max-width: 1500px;
+    background: #88ffb1;
+    margin: auto;
+}
+
+.head {
+    position: relative;
+    width: 100%;
+    height: auto;
+    background: #65ff7c;
+
+}
+
+.body {
+    position: relative;
+    width: 100%;
+    height: auto;
+    background: #21ffd0;
+
+}
+
+.left {
+    width: 350px;
+    background: #ff9856;
+    height: 200px;
+    margin: 5px;
+}
+
+.footer {
+    position: relative;
+    width: 100%;
+    height: auto;
+    background: #2fb3ff;
+
+}
+
+.all {
+    padding-top: 1px;
+    padding-bottom: 1px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+.checkbox{
+
+}
+
+p {
+    color: #0c3125;
+    font-family: Consolas;
+    text-align: center;
+}
+
+form {
+    padding: 5px;
+    position: relative;
+}
