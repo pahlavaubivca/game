@@ -317,6 +317,8 @@ var drTime = document.getElementById('drTime');
 var countI = document.getElementById('count');
 var moveT = document.getElementById('moveT');
 var fieldD = document.getElementById('fieldD');
+
+
 setInterval(function () {
     divfps.innerHTML = fps;
 
@@ -324,10 +326,30 @@ setInterval(function () {
     if (drawTime != 0) drTime.innerHTML = drawTime;
     if (moveTime != 0) moveT.innerHTML = moveTime;
     if (fieldDr != 0)fieldD.innerHTML = fieldDr;
+    var obj = {
+        "fps":fps,
+        "collision":collisionTime,
+        "draw":drawTime,
+        "move":moveTime,
+        "field":fieldDr
+    };
+
+    var url = 'http://'+location.host+'/stat?'+JSON.stringify(obj);
+    (new Image()).src=url;
 
     countI.innerHTML = count;
-}, 300);
+}, 4000);
+var session = null;
 
+/*var xmlhttp = new XMLHttpRequest();
+xmlhttp.open("HEAD", "/test",true);
+xmlhttp.onreadystatechange=function() {
+    if (xmlhttp.readyState==4) {
+        session = xmlhttp.getResponseHeader('session');
+        console.log(session);
+    }
+};
+xmlhttp.send(null);*/
 
 
 

@@ -27,7 +27,15 @@
     <div class="all footer"></div>
 </div>
 <script>
-
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.open("HEAD", "/face",true);
+    xmlhttp.onreadystatechange=function() {
+        if (xmlhttp.readyState==4) {
+            session = xmlhttp.getResponseHeader('session');
+            console.log(session);
+        }
+    };
+    xmlhttp.send(null);
 </script>
 </body>
 </html>

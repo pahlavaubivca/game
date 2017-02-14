@@ -15,10 +15,14 @@ module.exports = (function () {
             if (err) {
                 res.end(err)
             }
-            res.setHeader("asd", true);
-            res.writeHeader(200, {"Content-Type": "text/html"});
-            res.write(html);
-            res.end();
+            var asd = client.query('select max(session_id) from speedstats');
+            asd.on('end', function (e) {
+                res.setHeader("session", e.rows[0].max);
+                res.writeHeader(200, {"Content-Type": "text/html"});
+                res.write(html);
+                res.end();
+            });
+            //res.end();
         })
     };
     var testHandler = function (req, res) {
@@ -28,7 +32,13 @@ module.exports = (function () {
          }
          console.log("The file was saved!");
          });*/
-        res.end('return resp');
+        var asd = client.query('select * from speedstats');
+        asd.on('end', function (e) {
+            console.log(e.rows);
+            res.setHeader("session", e.rows[0]);
+            res.end('return resp');
+        });
+
     };
     var css = function (req, res) {
         var fileName = req.url.match(/\w+\.\w+/i);
@@ -85,17 +95,38 @@ module.exports = (function () {
             }
         }
 
+        var objMap = {
+            "fps": null,
+            "collision": null,
+            "draw": null,
+            "move": null,
+            "field": null
+        };
+        console.log(urlComponent.param);
         if (urlComponent.param) {
             try {
                 urlComponent.param = JSON.parse(decodeURIComponent(urlComponent.param));
+                for (var key in objMap) {
+                    if (objMap.hasOwnProperty(key)) {
+                        objMap[key] = urlComponent.param[key];
+                    }
+                }
             } catch (e) {
                 console.log(e);
             }
         }
 
+        var sendArr = [urlComponent,
+            666,
+            objMap.fps,
+            objMap.collision,
+            objMap.draw,
+            objMap.move,
+            objMap.field
+        ];
         if (urlComponent.param) {
-            client.query('INSERT INTO speedstats (date,fps,encounter_time,jsonobj)' +
-                ' VALUES (current_date,1,1,$1)', [urlComponent], function (err, result) {
+            client.query('INSERT INTO speedstat2 (session_id,date,json,fps,collision,draw,move,field)' +
+                ' VALUES ($2,current_date,$1,$3,$4,$5,$6,$7)', sendArr, function (err, result) {
                 if (err) {
                     return console.error('error running query', err);
                 }
