@@ -27,6 +27,9 @@ module.exports = (function () {
         if (req.url.match(/spacebattle$/i)) {
             handlers.spacebattle(req, res);
         }
+        if(req.url.match(/getSessionId$/i)){
+            handlers.getSessionId(req, res);
+        }
     };
     var stat = function (req, res) {
         handlers.setStat(req, res)

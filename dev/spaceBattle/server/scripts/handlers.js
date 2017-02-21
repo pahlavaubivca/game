@@ -32,13 +32,21 @@ module.exports = (function () {
          }
          console.log("The file was saved!");
          });*/
-        var asd = client.query('select * from speedstats');
+        var asd = client.query('select  max(session_id) from speedstat2');
         asd.on('end', function (e) {
             console.log(e.rows);
             res.setHeader("session", e.rows[0]);
             res.end('return resp');
         });
 
+    };
+    var getSessionId = function(req,res){
+        var maxSessionId = client.query('select  max(session_id) from speedstat2');
+        maxSessionId.on('end', function (e) {
+            console.log(e.rows);
+            res.setHeader("session", e.rows[0]);
+            res.end('return resp');
+        });
     };
     var css = function (req, res) {
         var fileName = req.url.match(/\w+\.\w+/i);
@@ -76,7 +84,6 @@ module.exports = (function () {
         })
     };
     var setStat = function (req, res) {
-        console.log(req.url);
         var urlComponent = {};
 
         if (smallUrlParser.exec(req.url)) {
@@ -102,7 +109,6 @@ module.exports = (function () {
             "move": null,
             "field": null
         };
-        console.log(urlComponent.param);
         if (urlComponent.param) {
             try {
                 urlComponent.param = JSON.parse(decodeURIComponent(urlComponent.param));
@@ -116,8 +122,9 @@ module.exports = (function () {
             }
         }
 
+        //666 session id
         var sendArr = [urlComponent,
-            666,
+            0,
             objMap.fps,
             objMap.collision,
             objMap.draw,
@@ -140,6 +147,7 @@ module.exports = (function () {
         'jsjson': jsjson,
         'css': css,
         'setStat': setStat,
-        'spacebattle': spacebattle
+        'spacebattle': spacebattle,
+        'getSessionId':getSessionId
     }
 })();
