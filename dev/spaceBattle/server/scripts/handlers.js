@@ -107,7 +107,8 @@ module.exports = (function () {
             "collision": null,
             "draw": null,
             "move": null,
-            "field": null
+            "field": null,
+            "unitCount":null
         };
         if (urlComponent.param) {
             try {
@@ -122,18 +123,18 @@ module.exports = (function () {
             }
         }
 
-        //666 session id
         var sendArr = [urlComponent,
             0,
             objMap.fps,
             objMap.collision,
             objMap.draw,
             objMap.move,
-            objMap.field
+            objMap.field,
+            objMap.unitCount
         ];
         if (urlComponent.param) {
-            client.query('INSERT INTO speedstat2 (session_id,date,json,fps,collision,draw,move,field)' +
-                ' VALUES ($2,current_date,$1,$3,$4,$5,$6,$7)', sendArr, function (err, result) {
+            client.query('INSERT INTO speedstat2 (session_id,date,json,fps,collision,draw,move,field,unitcount)' +
+                ' VALUES ($2,current_date,$1,$3,$4,$5,$6,$7,$8)', sendArr, function (err, result) {
                 if (err) {
                     return console.error('error running query', err);
                 }

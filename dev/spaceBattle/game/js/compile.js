@@ -110,6 +110,7 @@ compileObj.collision = function (/*currentUnit, key*/) {
                         var CDUP2 = compileObj.unit[k].physicalCharact;
 
                         bW = CDUP2.position.x - CDUP.position.x > 0 ? CDUP.width : CDUP2.width;
+                        /**/
                         bH = CDUP2.position.y - CDUP.position.y > 0 ? CDUP.height : CDUP2.height;
                         xDif = Math.abs(CDUP2.position.x - CDUP.position.x) - bW;
                         yDif = Math.abs(CDUP2.position.y - CDUP.position.y) - bH;
@@ -150,8 +151,8 @@ compileObj.collision = function (/*currentUnit, key*/) {
 
 };
 
-compileObj.random = function (wat) {
-    if (wat == "color") {
+compileObj.random = function (what) {
+    if (what == "color") {
         var hex = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 'a', 'b', 'c', 'd', 'f', 'e'];
         var color = '#';
         while (color.length < 4) {
@@ -160,7 +161,7 @@ compileObj.random = function (wat) {
         ;
         return color
     }
-    if (wat == "enemyPosition") {
+    if (what == "enemyPosition") {
         return {
             "x": (function () {
                 return Math.random() * ((compileObj.field.width - 100) - 0) + 0;//remove 100 its hardcode
@@ -170,10 +171,10 @@ compileObj.random = function (wat) {
             })()
         }
     }
-    if (wat == "step") {
+    if (what == "step") {
         return Math.floor(Math.random() * (3 - 1) + 1);
     }
-    if (wat == "size") {
+    if (what == "size") {
         return Math.floor(Math.random() * (30 - 15) + 15);
     }
 };
@@ -212,8 +213,11 @@ compileObj.registerAction = function () {
         event.keyCode == 87 ? action.topMove = 1 : null;
         event.keyCode == 83 ? action.downMove = 1 : null;
     });
-    window.addEventListener("click", function () {
+    window.addEventListener("mousedown", function () {
         action.fire = true;
+    });
+    window.addEventListener("mouseup", function () {
+        action.fire = false;
     });
     window.addEventListener('keyup', function (event) {
         event.keyCode == 65 ? action.leftMove = -1 : null;
@@ -249,6 +253,12 @@ compileObj.move = function () {
         }
     }
 };
+compileObj.fire = function () {
+    if (compileObj.unit.mainHero.physicalCharact.fire) {
+
+    }
+};
+
 
 /**
  * draw all elements : GG, enemys, nps, bullets
@@ -262,7 +272,7 @@ compileObj.runOnce = function () {
 
                 compileObj.generatorEnemy();
                 console.log('enemy');
-                if (count > 5) {
+                if (count > 105) {
                     clearInterval(interval);
                 }
                 count++;
@@ -318,7 +328,6 @@ var countI = document.getElementById('count');
 var moveT = document.getElementById('moveT');
 var fieldD = document.getElementById('fieldD');
 
-
 setInterval(function () {
     divfps.innerHTML = fps;
 
@@ -327,29 +336,49 @@ setInterval(function () {
     if (moveTime != 0) moveT.innerHTML = moveTime;
     if (fieldDr != 0)fieldD.innerHTML = fieldDr;
     var obj = {
-        "fps":fps,
-        "collision":collisionTime,
-        "draw":drawTime,
-        "move":moveTime,
-        "field":fieldDr
+        "fps": fps,
+        "collision": collisionTime,
+        "draw": drawTime,
+        "move": moveTime,
+        "field": fieldDr,
+        "unitCount": count
     };
-
-    var url = 'http://'+location.host+'/stat?'+JSON.stringify(obj);
-    (new Image()).src=url;
-
+    cumulationStat(obj);
     countI.innerHTML = count;
-}, 4000);
-var session = null;
+}, 500);
+
+var objectToSend = {};
+function cumulationStat(obj) {
+    for (var key in obj) {
+        if (obj.hasOwnProperty(key)) {
+            if (!objectToSend[key]) {
+                objectToSend[key] = obj[key];
+            } else {
+                if (key == "unitCount") {
+                    objectToSend[key] = obj[key];
+                } else {
+                    objectToSend[key] = (objectToSend[key] + obj[key]) / 2;
+                }
+            }
+        }
+    }
+}
+/*window.addEventListener('beforeunload',function(){
+ var url = 'http://'+location.host+'/stat?'+JSON.stringify(objectToSend);
+ (new Image()).src=url;
+ });*/
+
 
 /*var xmlhttp = new XMLHttpRequest();
-xmlhttp.open("HEAD", "/test",true);
-xmlhttp.onreadystatechange=function() {
-    if (xmlhttp.readyState==4) {
-        session = xmlhttp.getResponseHeader('session');
-        console.log(session);
-    }
-};
-xmlhttp.send(null);*/
+ xmlhttp.open("HEAD", "/test",true);
+ xmlhttp.onreadystatechange=function() {
+ if (xmlhttp.readyState==4) {
+ session = xmlhttp.getResponseHeader('session');
+ console.log(session);
+ }
+ };
+ xmlhttp.send(null);*/
+
 
 
 
