@@ -12,6 +12,8 @@ canvas {
     width: 20px;
     height: 20px;
     overflow: hidden;
+
+    display: none;
 }
 
 .side-stat-panel{
@@ -20,6 +22,8 @@ canvas {
     top:5px;
     left:55px;
     padding:5px;
+
+    display: none;
 }
 
 .count {
