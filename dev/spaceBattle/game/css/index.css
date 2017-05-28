@@ -13,7 +13,7 @@ canvas {
     height: 20px;
     overflow: hidden;
 
-    display: none;
+   /* display: none;*/
 }
 
 .side-stat-panel{
