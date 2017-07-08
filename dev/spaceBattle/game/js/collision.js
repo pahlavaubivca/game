@@ -11,7 +11,9 @@
     var init = null;
     var fps = 0, lastCalledTime = 0;
     var fpsDiv = document.getElementById("fps");
-    var lastDateFPS = 0
+    var lastDateFPS = 0;
+
+    var mainHero = null;
 
     var shapes = [];
 
@@ -22,7 +24,7 @@
     };
 
     var generateShape = function () {
-        for (var i = 0; i < 100; i++) {
+        for (var i = 0; i < 10; i++) {
             shapes.push(init.generateEnemy());
         }
     };
@@ -63,15 +65,9 @@
             }
             if (si.left + si.width > window.innerWidth || si.left < 0) {
                 shapes[i].stepX *= -1;
-                /*if (si.left + si.width > window.innerWidth<0) {
-                    si.left = window.innerWidth - si.width;
-                }*/
             }
             if (si.top + si.height > window.innerHeight || si.top < 0) {
                 si.stepY *= -1;
-               /* if(si.top + si.height > window.innerHeight) {
-                    si.top = window.innerHeight - si.height;
-                }*/
             }
             move(i);
         }
@@ -80,26 +76,20 @@
     var move = function (shape) {
         shapes[shape].left += shapes[shape].stepX;
         shapes[shape].top += shapes[shape].stepY;
-        shapes[shape].centerX += shapes[shape].stepX / 2;
-        shapes[shape].centerY += shapes[shape].stepY / 2;
-
+        draw(shapes[shape]);
     };
 
-    var draw = function () {
+    var draw = function (shape) {
         ctx = canvas.getContext("2d");
-        for (var key = 0; key < shapes.length; key++) {
-            ctx.fillRect(shapes[key].left, shapes[key].top, shapes[key].width, shapes[key].height);
-            ctx.fillStyle = shapes[key].color;
-            ctx.fill();
-        }
-
+        ctx.fillRect(shape.left, shape.top, shape.width, shape.height);
+        ctx.fillStyle = shape.color;
+        ctx.fill();
     };
 
 
     var requestAnimation = function () {
         reDrawField();
         collision();
-        draw();
 
         window.requestAnimationFrame(requestAnimation);
         if (!lastCalledTime) {
@@ -117,9 +107,13 @@
         }
     };
 
-    requirejs(["../js/init_v2.js"],function(initObj){
+    requirejs(["../js/initial.js"],function(initObj){
         init = initObj;
+        mainHero = init.mainHero();
         generateShape();
         requestAnimation();
+       /* requirejs(["../js/event.js"],function(obj){
+            obj.init(mainHero);
+        });*/
     });
 })();

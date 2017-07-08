@@ -2,10 +2,10 @@
  * Created by pahlavaubivca on 12.02.2017.
  */
 var fs = require('fs');
-var pg = require('pg');
-var conString = "postgres://postgres:AdminUser1**@localhost:5432/spacebattle";
-var client = new pg.Client(conString);
-client.connect();
+//var pg = require('pg');
+//var conString = "postgres://postgres:AdminUser1**@localhost:5432/spacebattle";
+//var client = new pg.Client(conString);
+//client.connect();
 var fullUrlParser = /(https?:)?\/\/(.*?)\/(?:(.*)\/)?(\w+\.\w+)?[\#|\?]?(.*)?/i;
 var smallUrlParser = /\/(?:(.*)\/)?(.*)?[\?](.*)?/i;
 
@@ -40,14 +40,14 @@ module.exports = (function () {
         });
 
     };
-    var getSessionId = function(req,res){
+  /*  var getSessionId = function(req,res){
         var maxSessionId = client.query('select  max(session_id) from speedstat2');
         maxSessionId.on('end', function (e) {
             console.log(e.rows);
             res.setHeader("session", e.rows[0]);
             res.end('return resp');
         });
-    };
+    };*/
     var css = function (req, res) {
         var fileName = req.url.match(/\w+\.\w+/i);
         if (fileName) {
@@ -83,7 +83,7 @@ module.exports = (function () {
             res.end();
         })
     };
-    var setStat = function (req, res) {
+   /* var setStat = function (req, res) {
         var urlComponent = {};
 
         if (smallUrlParser.exec(req.url)) {
@@ -141,14 +141,14 @@ module.exports = (function () {
             });
         }
         res.end(JSON.stringify(urlComponent));
-    };
+    };*/
     return {
         'face': face,
         'testHandler': testHandler,
         'jsjson': jsjson,
         'css': css,
-        'setStat': setStat,
+        // 'setStat': setStat,
         'spacebattle': spacebattle,
-        'getSessionId':getSessionId
+        //'getSessionId':getSessionId
     }
 })();
