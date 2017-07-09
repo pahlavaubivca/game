@@ -106,14 +106,14 @@
             lastDateFPS = Date.now()
         }
     };
-
+//asdfafs
     requirejs(["../js/initial.js"],function(initObj){
         init = initObj;
         mainHero = init.mainHero();
         generateShape();
         requestAnimation();
-       /* requirejs(["../js/event.js"],function(obj){
+        requirejs(["../js/event.js"],function(obj){
             obj.init(mainHero);
-        });*/
+        });
     });
 })();
