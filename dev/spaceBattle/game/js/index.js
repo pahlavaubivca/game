@@ -42,11 +42,6 @@
         ctx.fillRect(shape.left, shape.top, shape.width, shape.height);
         ctx.fillStyle = shape.color;
         ctx.fill();
-        /* for (var key = 0; key < shapes.length; key++) {
-         ctx.fillRect(shapes[key].left, shapes[key].top, shapes[key].width, shapes[key].height);
-         ctx.fillStyle = shapes[key].color;
-         ctx.fill();
-         }*/
     };
 
 

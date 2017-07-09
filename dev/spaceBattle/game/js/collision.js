@@ -24,7 +24,7 @@
     };
 
     var generateShape = function () {
-        for (var i = 0; i < 10; i++) {
+        for (var i = 0; i < 100; i++) {
             shapes.push(init.generateEnemy());
         }
     };
@@ -43,40 +43,72 @@
                     yDif *= -1;
                     if (xDif < yDif) { // collision x coordinate
                         if (sj.stepX > 0 && si.stepX > 0) {
-                            sj.left > si.left ? (si.stepX *= -1) : (sj.stepX *= -1);
+                            if (sj.left > si.left) {
+                                si.stepX *= -1;
+                            } else {
+                                sj.stepX *= -1;
+                                sj.xDif = xDif;
+                            }
                         } else if (sj.stepX < 0 && si.stepX < 0) {
-                            sj.left > si.left ? (sj.stepX *= -1) : (si.stepX *= -1);
+                            if (sj.left > si.left) {
+                                sj.stepX *= -1;
+                                sj.xDif = xDif;
+                            } else {
+                                si.stepX *= -1;
+                            }
                         } else {
                             sj.stepX *= -1;
                             si.stepX *= -1;
+                            sj.xDif = xDif;
                         }
                     }
                     else if (xDif >= yDif) {
                         if (sj.stepY > 0 && si.stepY > 0) {
-                            sj.top > si.top ? (si.stepY *= -1) : (sj.stepY *= -1);
+                            if (sj.top > si.top) {
+                                si.stepY *= -1;
+                            } else {
+                                sj.stepY *= -1;
+                                sj.yDif = yDif;
+                            }
                         } else if (sj.stepY < 0 && si.stepY < 0) {
-                            sj.top > si.top ? (sj.stepY *= -1) : (si.stepY *= -1);
+                            if (sj.top > si.top) {
+                                sj.stepY *= -1;
+                                sj.yDif = yDif;
+                            } else {
+                                si.stepY *= -1;
+                            }
                         } else {
                             sj.stepY *= -1;
                             si.stepY *= -1;
+                            sj.yDif = yDif;
                         }
                     }
                 }
             }
             if (si.left + si.width > window.innerWidth || si.left < 0) {
-                shapes[i].stepX *= -1;
+                si.stepX *= -1;
+                si.left < 0 ? si.left = 0 : null;
+                si.left + si.width > window.innerWidth ? si.left = window.innerWidth - si.width : null;
             }
-            if (si.top + si.height > window.innerHeight || si.top < 0) {
+            if (si.top + si.height > si.yZone || si.top < 0) {
                 si.stepY *= -1;
+                si.top < 0 ? si.top = 0 : null;
+                si.top + si.height > si.yZone ? si.top = si.yZone - si.height : null;
             }
-            move(i);
+            move(si);
+
         }
+        mainHeroMove();
     };
 
     var move = function (shape) {
-        shapes[shape].left += shapes[shape].stepX;
-        shapes[shape].top += shapes[shape].stepY;
-        draw(shapes[shape]);
+        if (!shape.mainHero) {
+            shape.left += shape.stepX+ (shape.xDif * (shape.stepX > 0 ? 1 : -1));
+            shape.top += shape.stepY + (shape.yDif * (shape.stepY > 0 ? 1 : -1));
+            shape.xDif = 0;
+            shape.yDif = 0;
+       }
+        draw(shape);
     };
 
     var draw = function (shape) {
@@ -86,6 +118,14 @@
         ctx.fill();
     };
 
+    var mainHeroMove = function () {
+        if (mainHero.mLeft !== null) {
+            mainHero.left = mainHero.left + mainHero.moveStepX * (mainHero.mLeft ? -1 : 1);
+        }
+        if (mainHero.mTop !== null) {
+            mainHero.top = mainHero.top + mainHero.moveStepY * (mainHero.mTop ? -1 : 1);
+        }
+    };
 
     var requestAnimation = function () {
         reDrawField();
@@ -101,18 +141,20 @@
         lastCalledTime = Date.now();
         fps = 1 / delta;
 
-        if(Date.now() - lastDateFPS>300){
+        if (Date.now() - lastDateFPS > 300) {
             fpsDiv.innerHTML = fps;
             lastDateFPS = Date.now()
         }
     };
-//asdfafs
-    requirejs(["../js/initial.js"],function(initObj){
+
+    requirejs(["../js/initial.js"], function (initObj) {
         init = initObj;
         mainHero = init.mainHero();
+        shapes.push(mainHero);
+
         generateShape();
         requestAnimation();
-        requirejs(["../js/event.js"],function(obj){
+        requirejs(["../js/event.js"], function (obj) {
             obj.init(mainHero);
         });
     });

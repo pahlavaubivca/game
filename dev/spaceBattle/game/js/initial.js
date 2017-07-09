@@ -5,38 +5,44 @@ define(function () {
     var random = function (min, max) {
         return Math.random() * (max - min) + min; // Math.floor()
     };
+
     var enemyPosX = 10;
     var enemyPosY = 10;
     var generateEnemy = function () {
         var enemy = {};// objJSON.unit.enemy();
-        enemy.width = random(5, 7);
-        enemy.height = random(5, 7);
+        enemy.width = random(18, 23);
+        enemy.height = random(15, 24);
         if (!(enemyPosX + enemy.width + 10 < window.innerWidth)) {
             enemyPosX = 0;
-            enemyPosY += 70;
+            enemyPosY += 20;
         }
         enemyPosX += enemy.width + 10;
         enemy.left = enemyPosX;
         enemy.top = enemyPosY;
-        enemy.stepX = random(0.8,2);
-        enemy.stepY = random(0.8,2);
+        enemy.stepX = random(0.8, 2);
+        enemy.stepY = random(0.8, 2);
         enemy.color = "#" + (Math.random() * 0xFFFFFF << 0).toString(16);
+        enemy.enemy = true;
+        enemy.xDif = 0;
+        enemy.yDif = 0;
+        enemy.yZone = window.innerHeight;
         return enemy;
     };
 
-    var mainHero = function(){
+    var mainHero = function () {
         var mh = {};
         mh.width = 50;
         mh.height = 25;
-        mh.left = "center";
+        mh.left = 100;
         mh.top = 50;
-        mh.stepX = 2;
-        mh.stepY = 0.5;
+        mh.moveStepX = 4;
+        mh.moveStepY = 2;
         mh.color = "red";
-        mh.mLeft = false;
-        mh.mRight = false;
-        mh.mTop = false;
-        mh.mBottom = false;
+        mh.mLeft = null;
+       // mh.mRight = false;
+        mh.mTop = null;
+        //mh.mBottom = false;
+        mh.mainHero = true;
         return mh;
     };
     /*var objJSON = {
@@ -134,10 +140,10 @@ define(function () {
      doom: {}
      }
      };*/
-    return  {
+    return {
         generateEnemy: generateEnemy,
         random: random,
-        mainHero:mainHero
+        mainHero: mainHero
 
     };
 });
